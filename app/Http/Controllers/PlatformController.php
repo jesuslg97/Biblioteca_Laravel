@@ -9,10 +9,18 @@ use Illuminate\Support\Facades\Lang;
 
 class PlatformController extends Controller
 {
-    public function index(){
-        $platforms = Platform::paginate(10);
+    const PAGINATE_SIZE = 10;
 
-        return view('platform.list', ['platform'=>$platforms]);
+    public function index(Request $request){
+        $platformName = null;
+        if($request->has('platformName')) {
+            $platformName = $request->$platformName;
+            $platforms = Platform::where('name', 'like', '%'. $platformName . '%')->paginate(self::PAGINATE_SIZE);
+        } else {
+            $platforms = Platform::paginate(self::PAGINATE_SIZE);
+        }
+
+        return view('platform.list', ['platform'=>$platforms, 'platformName'=>$platformName]);
     }
 
     public function create(){

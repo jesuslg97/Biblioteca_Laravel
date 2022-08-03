@@ -1,4 +1,15 @@
 @if(count($platforms) > 0)
+
+    <div class="col-md-6">
+        <form action="" method="post">
+            @csrf
+            <input id="platformName" name="platformName" class="form-control" value="@isset($platformName) {{$platformName}} @endisset"
+                    placeholder="{{__('string.search_platform_name_placeholder')}}">
+            <button type="submit" class="btn btn-primary">{{__('string.search_btn')}}</button>
+        </form>
+
+    </div>
+
     <table class="table table-striped align-items-center table-flush">
 
         <thead>

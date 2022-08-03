@@ -23,3 +23,5 @@ Route::prefix('platforms')->group(function () {
     Route::post('/{platform}/update', 'PlatformController@edit')->name('platforms.update');
     Route::delete('/{platform}/delete', 'PlatformController@delete')->name('platforms.delete');
 });
+
+Route::match(['get', 'post'], '/', 'PlatformController@index')->name('platforms.index');

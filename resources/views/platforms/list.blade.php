@@ -14,9 +14,9 @@
 
         <thead>
         <tr>
-            <th>{{'string.id_header'}}</th>
-            <th>{{'string.name_header'}}</th>
-            <th>{{'string.actions_header'}}</th>
+            <th>{{__('string.id_header')}}</th>
+            <th>{{__('string.name_header')}}</th>
+            <th>{{__('string.actions_header')}}</th>
         </tr>
         </thead>
 
@@ -41,12 +41,7 @@
                             method="post" style="display: inline-block">
                         {{ method_field('delete') }}
                         {{ csrf_field() }}
-                        <a href="javascript:void(0);"
-                            onclick="event.preventDefault()
-                                        document.getElementById('delete-form-{{ $platform->id }}').submit()">
-                            <i class="fa fa-trash-alt"></i>
-
-                        </a>
+                        <button type="submit" class="btn btn-danger">Borrar</button>
                     </form>
                 </td>
             </tr>

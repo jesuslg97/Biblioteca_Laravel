@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::prefix('platforms')->group(function () {
-   Route::get('/', 'PlatformController@index')->name('platforms.index');
+    Route::match(['get', 'post'], '/', 'PlatformController@index')->name('platforms.index');
     Route::get('/create', 'PlatformController@create')->name('platforms.create');
     Route::post('/store', 'PlatformController@store')->name('platforms.store');
     Route::get('/{platform}/edit', 'PlatformController@edit')->name('platforms.edit');
@@ -24,4 +24,4 @@ Route::prefix('platforms')->group(function () {
     Route::delete('/{platform}/delete', 'PlatformController@delete')->name('platforms.delete');
 });
 
-Route::match(['get', 'post'], '/', 'PlatformController@index')->name('platforms.index');
+

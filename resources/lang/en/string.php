@@ -19,6 +19,11 @@ return [
     'list_title' =>'Listado de plataformas',
     'delete_btn' => 'Borrar',
     'editar_btn' => 'Editar',
+    'create_platform' => 'Crear plataforma',
+    'platform_name' => 'Nombre de la plataforma',
+    'create_bn' => 'Crear',
+    'edit_btn' => 'Editar',
+    'edit_platform' => 'Editar plataforma',
 
 
 ];

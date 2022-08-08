@@ -47,7 +47,9 @@
                                     </td>
 
                                     <td>
-                                    <button type="submit" class="btn btn-success">{{__('string.editar_btn')}}</button>
+                                    <a class="btn btn-success" href="{{ route('platforms.edit', $platform) }}">
+                                        Editar
+                                    </a>
 
                                         <form id="delete-form-{{ $platform->id }}"
                                                 action="{{ route('platforms.delete', [$platform]) }}"

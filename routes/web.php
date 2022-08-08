@@ -20,7 +20,7 @@ Route::prefix('platforms')->group(function () {
     Route::get('/create', 'PlatformController@create')->name('platforms.create');
     Route::post('/store', 'PlatformController@store')->name('platforms.store');
     Route::get('/{platform}/edit', 'PlatformController@edit')->name('platforms.edit');
-    Route::post('/{platform}/update', 'PlatformController@edit')->name('platforms.update');
+    Route::post('/{platform}/update', 'PlatformController@update')->name('platforms.update');
     Route::delete('/{platform}/delete', 'PlatformController@delete')->name('platforms.delete');
 });
 

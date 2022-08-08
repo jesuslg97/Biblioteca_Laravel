@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Platform;
-use Dotenv\Validator;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Log;
+use \Validator;
 
 class PlatformController extends Controller
 {
@@ -30,11 +31,7 @@ class PlatformController extends Controller
         return view('platforms.create');
     }
 
-    protected function validatePlatform($request) {
-        return Validator::make($request->all(), [
-            'platformName' => ['required', 'string', 'max:255', 'min:1']
-        ]);
-    }
+  
 
     public function store(Request $request){
         $this->validatePlatform($request)->validate();
@@ -47,16 +44,16 @@ class PlatformController extends Controller
     }
 
     public function edit(Platform $platform){
-        return view('platforms.create', ['platform'=>$platform]);
+        return view('platforms.edit', ['platform'=>$platform]);
     }
 
     public function update(Request $request, Platform $platform){
         $this->validatePlatform($request)->validate();
-
+        Log::info('Fallo',array($platform));
         $platform->name = $request->platformName;
         $platform->save();
 
-        return redirect()->route('platforms.update')->with('success', Lang::get('alerts.platforms_update_successfully'));
+        return redirect()->route('platforms.index')->with('success', Lang::get('alerts.platforms_update_successfully'));
     }
 
     public function delete(Request $request, Platform $platform){
@@ -66,4 +63,11 @@ class PlatformController extends Controller
         }
         return redirect()->route('platforms.index')->with('error', Lang::get('alerts.platforms_delete_error'));
     }
+
+    protected function validatePlatform($request) {
+        return Validator::make($request->all(), [
+            'platformName' => ['required', 'string', 'max:255', 'min:1']
+        ]);
+    }
+    
 }

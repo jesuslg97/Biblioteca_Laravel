@@ -6,21 +6,24 @@ use App\Platform;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Log;
 
 class PlatformController extends Controller
 {
     const PAGINATE_SIZE = 10;
 
     public function index(Request $request){
+        
         $platformName = null;
         if($request->has('platformName')) {
             $platformName = $request->$platformName;
             $platforms = Platform::where('name', 'like', '%'. $platformName . '%')->paginate(self::PAGINATE_SIZE);
         } else {
             $platforms = Platform::paginate(self::PAGINATE_SIZE);
+            Log::info('prueba',array($platforms));
         }
 
-        return view('platform.list', ['platform'=>$platforms, 'platformName'=>$platformName]);
+        return view('platforms.list', ['platforms'=>$platforms, 'platformName'=>$platformName]);
     }
 
     public function create(){

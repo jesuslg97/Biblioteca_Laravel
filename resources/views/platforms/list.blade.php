@@ -21,34 +21,37 @@
         </thead>
 
         <tbody>
+            @foreach($platforms as $platform)
             <tr>
                 <td>
-                    {{$platforms->id}}
+                    {{$platform->id}}
                 </td>
 
                 <td>
-                    {{$platforms->name}}
+                    {{$platform->name}}
                 </td>
 
                 <td>
-                    <a href="{{ route('platform.edit', $platforms) }}">
+                    <a href="{{ route('platforms.edit', $platform) }}">
                         <i class="fa fa-edit"></i>
                     </a>
 
-                    <form id="delete-form-{{ $platforms->id }}"
-                            action="{{ route('platform.delete', [$platforms]) }}"
+                    <form id="delete-form-{{ $platform->id }}"
+                            action="{{ route('platforms.delete', [$platform]) }}"
                             method="post" style="display: inline-block">
                         {{ method_field('delete') }}
                         {{ csrf_field() }}
                         <a href="javascript:void(0);"
                             onclick="event.preventDefault()
-                                        document.getElementById('delete-form-{{ $platforms->id }}').submit()">
+                                        document.getElementById('delete-form-{{ $platform->id }}').submit()">
                             <i class="fa fa-trash-alt"></i>
 
                         </a>
                     </form>
                 </td>
             </tr>
+            @endforeach
+
         </tbody>
 
     </table>

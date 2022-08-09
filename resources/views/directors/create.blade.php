@@ -32,7 +32,7 @@
                             <div class="mb-3">
                                 <label for="directorDate" class="form-label">{{__('string.director_date')}}</label>
                                 <input id="directorDate" name="directorDate" type="date"
-                                       placeholder="{{__('string.director_surname')}}" class="form-control" required>
+                                       placeholder="{{__('string.director_date')}}" class="form-control" required>
                             </div>
 
                             <div class="mb-3">

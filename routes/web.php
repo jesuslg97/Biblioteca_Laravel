@@ -32,3 +32,12 @@ Route::prefix('directors')->group(function () {
     Route::post('/{director}/update', 'DirectorController@update')->name('directors.update');
     Route::delete('/{director}/delete', 'DirectorController@delete')->name('directors.delete');
 });
+
+Route::prefix('actors')->group(function () {
+    Route::match(['get', 'post'], '/', 'ActorController@index')->name('actors.index');
+    Route::get('/create', 'ActorController@create')->name('actors.create');
+    Route::post('/store', 'ActorController@store')->name('actors.store');
+    Route::get('/{actor}/edit', 'ActorController@edit')->name('actors.edit');
+    Route::post('/{actor}/update', 'ActorController@update')->name('actors.update');
+    Route::delete('/{actor}/delete', 'ActorController@delete')->name('actors.delete');
+});

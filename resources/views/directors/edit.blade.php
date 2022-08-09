@@ -10,12 +10,12 @@
             <div class="card shadow">
                 <div class="card-header border-0">
                     <div class="row">
-                        <h1>{{__('string.edit_platform')}}</h1>
+                        <h1>{{__('string.edit_director')}}</h1>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="col-md-6">
-                        <form name="create_platform" action="{{ route('directors.update',$director) }}" method="post">
+                        <form name="create_director" action="{{ route('directors.update',$director) }}" method="post">
                             @csrf
                             <div class="mb-3">
                                 <label for="directorName" class="form-label">{{__('string.director_name')}}</label>

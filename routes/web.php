@@ -24,4 +24,11 @@ Route::prefix('platforms')->group(function () {
     Route::delete('/{platform}/delete', 'PlatformController@delete')->name('platforms.delete');
 });
 
-
+Route::prefix('directors')->group(function () {
+    Route::match(['get', 'post'], '/', 'DirectorController@index')->name('directors.index');
+    Route::get('/create', 'DirectorController@create')->name('directors.create');
+    Route::post('/store', 'DirectorController@store')->name('directors.store');
+    Route::get('/{director}/edit', 'DirectorController@edit')->name('directors.edit');
+    Route::post('/{director}/update', 'DirectorController@update')->name('directors.update');
+    Route::delete('/{director}/delete', 'DirectorController@delete')->name('directors.delete');
+});

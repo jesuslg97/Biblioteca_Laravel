@@ -41,3 +41,12 @@ Route::prefix('actors')->group(function () {
     Route::post('/{actor}/update', 'ActorController@update')->name('actors.update');
     Route::delete('/{actor}/delete', 'ActorController@delete')->name('actors.delete');
 });
+
+Route::prefix('languages')->group(function () {
+    Route::match(['get', 'post'], '/', 'LanguageController@index')->name('languages.index');
+    Route::get('/create', 'LanguageController@create')->name('languages.create');
+    Route::post('/store', 'LanguageController@store')->name('languages.store');
+    Route::get('/{language}/edit', 'LanguageController@edit')->name('languages.edit');
+    Route::post('/{language}/update', 'LanguageController@update')->name('languages.update');
+    Route::delete('/{language}/delete', 'LanguageController@delete')->name('languages.delete');
+});

@@ -59,3 +59,12 @@ Route::prefix('nationalities')->group(function () {
     Route::post('/{nationality}/update', 'NationalityController@update')->name('nationalities.update');
     Route::delete('/{nationality}/delete', 'NationalityController@delete')->name('nationalities.delete');
 });
+
+Route::prefix('series')->group(function () {
+    Route::match(['get', 'post'], '/', 'SerieController@index')->name('series.index');
+    Route::get('/create', 'SerieController@create')->name('series.create');
+    Route::post('/store', 'SerieController@store')->name('series.store');
+    Route::get('/{serie}/edit', 'SerieController@edit')->name('series.edit');
+    Route::post('/{serie}/update', 'SerieController@update')->name('series.update');
+    Route::delete('/{serie}/delete', 'SerieController@delete')->name('series.delete');
+});

@@ -50,3 +50,12 @@ Route::prefix('languages')->group(function () {
     Route::post('/{language}/update', 'LanguageController@update')->name('languages.update');
     Route::delete('/{language}/delete', 'LanguageController@delete')->name('languages.delete');
 });
+
+Route::prefix('nationalities')->group(function () {
+    Route::match(['get', 'post'], '/', 'NationalityController@index')->name('nationalities.index');
+    Route::get('/create', 'NationalityController@create')->name('nationalities.create');
+    Route::post('/store', 'NationalityController@store')->name('nationalities.store');
+    Route::get('/{nationality}/edit', 'NationalityController@edit')->name('nationalities.edit');
+    Route::post('/{nationality}/update', 'NationalityController@update')->name('nationalities.update');
+    Route::delete('/{nationality}/delete', 'NationalityController@delete')->name('nationalities.delete');
+});

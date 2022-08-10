@@ -12,10 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::prefix('platforms')->group(function () {
+Route::prefix('platforms')->middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/', 'PlatformController@index')->name('platforms.index');
     Route::get('/create', 'PlatformController@create')->name('platforms.create');
     Route::post('/store', 'PlatformController@store')->name('platforms.store');
@@ -24,7 +24,7 @@ Route::prefix('platforms')->group(function () {
     Route::delete('/{platform}/delete', 'PlatformController@delete')->name('platforms.delete');
 });
 
-Route::prefix('directors')->group(function () {
+Route::prefix('directors')->middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/', 'DirectorController@index')->name('directors.index');
     Route::get('/create', 'DirectorController@create')->name('directors.create');
     Route::post('/store', 'DirectorController@store')->name('directors.store');
@@ -33,7 +33,7 @@ Route::prefix('directors')->group(function () {
     Route::delete('/{director}/delete', 'DirectorController@delete')->name('directors.delete');
 });
 
-Route::prefix('actors')->group(function () {
+Route::prefix('actors')->middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/', 'ActorController@index')->name('actors.index');
     Route::get('/create', 'ActorController@create')->name('actors.create');
     Route::post('/store', 'ActorController@store')->name('actors.store');
@@ -42,7 +42,7 @@ Route::prefix('actors')->group(function () {
     Route::delete('/{actor}/delete', 'ActorController@delete')->name('actors.delete');
 });
 
-Route::prefix('languages')->group(function () {
+Route::prefix('languages')->middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/', 'LanguageController@index')->name('languages.index');
     Route::get('/create', 'LanguageController@create')->name('languages.create');
     Route::post('/store', 'LanguageController@store')->name('languages.store');
@@ -51,7 +51,7 @@ Route::prefix('languages')->group(function () {
     Route::delete('/{language}/delete', 'LanguageController@delete')->name('languages.delete');
 });
 
-Route::prefix('nationalities')->group(function () {
+Route::prefix('nationalities')->middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/', 'NationalityController@index')->name('nationalities.index');
     Route::get('/create', 'NationalityController@create')->name('nationalities.create');
     Route::post('/store', 'NationalityController@store')->name('nationalities.store');
@@ -60,7 +60,7 @@ Route::prefix('nationalities')->group(function () {
     Route::delete('/{nationality}/delete', 'NationalityController@delete')->name('nationalities.delete');
 });
 
-Route::prefix('series')->group(function () {
+Route::prefix('series')->middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/', 'SerieController@index')->name('series.index');
     Route::get('/create', 'SerieController@create')->name('series.create');
     Route::post('/store', 'SerieController@store')->name('series.store');
@@ -68,3 +68,8 @@ Route::prefix('series')->group(function () {
     Route::post('/{serie}/update', 'SerieController@update')->name('series.update');
     Route::delete('/{serie}/delete', 'SerieController@delete')->name('series.delete');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/registrar', 'HomeController@registrar')->name('registrar');

@@ -10,7 +10,7 @@
             <div class="card shadow">
                 <div class="card-header border-0">
                     <div class="row">
-                        <h1>{{__('string.list_title')}}</h1>
+                        <h1>{{__('string.list_title_actor')}}</h1>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -24,7 +24,7 @@
                         <form action="" method="post">
                             @csrf
                             <input id="actorName" name="actorName" class="form-control"
-                                   value="@isset($actorName) {{$actorName}} @endisset" placeholder="{{__('strings.search_actor_name_placehorder')}}" />
+                                   value="@isset($actorName) {{$actorName}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
                         </form>
                     </div>
 

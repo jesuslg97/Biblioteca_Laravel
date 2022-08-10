@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>@tield('title')</title>
+        <title>Biblioteca de plataformas</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -18,9 +18,10 @@
 
     <body>
         <div class="flex-center position-ref full-height">
-            <div id="app" class="content"> 
+            <div id="app" class="content">
                 @include('partials.alerts')
                 @yield('content')
+                @include('partials.footer')
             </div>
         </div>
 

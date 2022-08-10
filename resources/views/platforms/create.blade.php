@@ -18,7 +18,7 @@
                     <form name="create_platform" action="{{ route('platforms.store') }}" method="post">
                         @csrf
                         <div class="mb-3">
-                            <h3 for="platformName" class="form-label">{{__('string.platform_name')}}</h3>
+                            <label for="platformName" class="form-label">{{__('string.platform_name')}}</label>
                             <input id="platformName" name="platformName" type="text"
                                 placeholder="{{__('string.platform_name')}}" class="form-control" required>
                         </div>

@@ -14,14 +14,14 @@ class PlatformController extends Controller
     const PAGINATE_SIZE = 2;
 
     public function index(Request $request){
-        
+
         $platformName = null;
         if($request->has('platformName')) {
             $platformName = $request->$platformName;
             $platforms = Platform::where('name', 'like', '%'. $platformName . '%')->paginate(self::PAGINATE_SIZE);
         } else {
             $platforms = Platform::paginate(self::PAGINATE_SIZE);
-    
+
         }
 
         return view('platforms.index', ['platforms'=>$platforms, 'platformName'=>$platformName]);
@@ -30,8 +30,6 @@ class PlatformController extends Controller
     public function create(){
         return view('platforms.create');
     }
-
-  
 
     public function store(Request $request){
         $this->validatePlatform($request)->validate();
@@ -69,5 +67,5 @@ class PlatformController extends Controller
             'platformName' => ['required', 'string', 'max:255', 'min:1']
         ]);
     }
-    
+
 }

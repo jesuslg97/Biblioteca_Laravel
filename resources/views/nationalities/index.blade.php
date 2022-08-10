@@ -10,7 +10,7 @@
             <div class="card shadow">
                 <div class="card-header border-0">
                     <div class="row">
-                        <h1>{{__('string.list_title')}}</h1>
+                        <h1>{{__('string.list_title_nationality')}}</h1>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -24,7 +24,7 @@
                         <form action="" method="post">
                             @csrf
                             <input id="nationalityName" name="nationalityName" class="form-control"
-                                   value="@isset($nationalityName) {{$nationalityName}} @endisset" placeholder="{{__('strings.search_nationality_name_placeholder')}}" />
+                                   value="@isset($nationalityName) {{$nationalityName}} @endisset" placeholder="{{__('string.search_nationality_name_placeholder')}}" />
                         </form>
                     </div>
                     <div class="table-responsive mt-3">

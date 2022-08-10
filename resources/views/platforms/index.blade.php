@@ -10,7 +10,7 @@
         <div class="card shadow">
             <div class="card-header border-0">
                 <div class="row">
-                    <h1>{{__('string.list_title')}}</h1>
+                    <h1>{{__('string.list_title_platform')}}</h1>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -23,8 +23,8 @@
                 <div class="col-md-6">
                     <form action="" method="post">
                         @csrf
-                        <input id="platformName" name="platformName" class="form-control" 
-                        value="@isset($platformName) {{$platformName}} @endisset" placeholder="{{__('strings.search_platform_name_placehorder')}}" />
+                        <input id="platformName" name="platformName" class="form-control"
+                        value="@isset($platformName) {{$platformName}} @endisset" placeholder="{{__('string.search_platform_name_placeholder')}}" />
                     </form>
                 </div>
                 <div class="table-responsive mt-3">

@@ -10,7 +10,7 @@
             <div class="card shadow">
                 <div class="card-header border-0">
                     <div class="row">
-                        <h1>{{__('string.list_title')}}</h1>
+                        <h1>{{__('string.list_title_director')}}</h1>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -24,7 +24,7 @@
                         <form action="" method="post">
                             @csrf
                             <input id="directorName" name="directorName" class="form-control"
-                                   value="@isset($directorName) {{$directorName}} @endisset" placeholder="{{__('strings.search_director_name_placehorder')}}" />
+                                   value="@isset($directorName) {{$directorName}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
                         </form>
                     </div>
 

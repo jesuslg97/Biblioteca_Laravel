@@ -59,7 +59,12 @@
                                         </td>
 
                                         <td>
-                                            {{$actor->nationality}}
+                                            
+                                            @foreach($nationalities as $nationality)
+                                                @if($actor->nationality == $nationality->id)
+                                                    {{ $nationality->name}}
+                                                @endif
+                                            @endforeach
                                         </td>
 
                                         <td>

@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Actor extends Model
 {
     protected $table = 'actors';
+
+    public function serieActor()
+    {
+        return $this->belongsTo(serieActor::class,'actor_id');
+    }
 }

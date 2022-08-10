@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Director;
+use App\Nationality;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
@@ -15,25 +16,30 @@ class DirectorController extends Controller
 
     public function index(Request $request){
 
+        $nationalities = Nationality::all();
         $directorsName = null;
         if($request->has('directorName')) {
             $directorsName = $request->$directorsName;
             $directors = Director::where('name', 'like', '%'. $directorsName . '%')->paginate(self::PAGINATE_SIZE);
         } else {
             $directors = Director::paginate(self::PAGINATE_SIZE);
+            
 
         }
-
-        return view('directors.index', ['directors'=>$directors, 'directorName'=>$directorsName]);
+        
+        return view('directors.index', ['directors'=>$directors, 'directorName'=>$directorsName,'nationalities'=>$nationalities]);
     }
 
     public function create(){
-        return view('directors.create');
+        $nationalities = Nationality::all();
+       
+        return view('directors.create',[ 'nationalities'=>$nationalities]);
     }
+    
 
     public function store(Request $request){
         $this->validateDirector($request)->validate();
-
+        Log::info('aa',array($request->directorNationality));
         $director = new Director();
         $director->name = $request->directorName;
         $director->surname = $request->directorSurname;
@@ -45,7 +51,8 @@ class DirectorController extends Controller
     }
 
     public function edit(Director $director){
-        return view('directors.edit', ['director'=>$director]);
+        $nationalities = Nationality::all();
+        return view('directors.edit', ['director'=>$director,'nationalities'=>$nationalities]);
     }
 
     public function update(Request $request, Director $director){
@@ -73,7 +80,7 @@ class DirectorController extends Controller
             'directorName' => ['required', 'string', 'max:255', 'min:1'],
             'directorSurname' => ['required', 'string', 'max:255', 'min:1'],
             'directorDate' => ['required', 'date'],
-            'directorNationality' => ['required', 'string', 'max:255', 'min:1']
+            'directorNationality' => ['required', 'int']
         ]);
     }
 

@@ -37,8 +37,13 @@
 
                             <div class="mb-3">
                                 <label for="directorNationality" class="form-label">{{__('string.director_nationality')}}</label>
-                                <input id="directorNationality" name="directorNationality" type="text"
-                                       placeholder="{{__('string.director_nationality')}}" class="form-control" required>
+                                </br>
+                                <select name="directorNationality" id="directorNationality" class="form-select" aria-label="Default select example">
+                                <option selected>Elige una nacionalidad</option>    
+                                    @foreach($nationalities as $nationality)
+                                        <option value="{{$nationality->id}}">{{$nationality->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <input type="submit" value="{{__('string.create_bn')}}" class="btn btn-primary" name="createBtn">

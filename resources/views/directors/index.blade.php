@@ -57,9 +57,13 @@
                                         <td>
                                             {{$director->date}}
                                         </td>
-
+                                        
                                         <td>
-                                            {{$director->nationality}}
+                                            @foreach($nationalities as $nationality)
+                                                @if($director->nationality == $nationality->id)
+                                                    {{ $nationality->name}}
+                                                @endif
+                                            @endforeach
                                         </td>
 
                                         <td>

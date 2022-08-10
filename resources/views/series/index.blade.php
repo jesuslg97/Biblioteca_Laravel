@@ -53,23 +53,47 @@
                                         </td>
 
                                         <td>
-                                            {{$serie->platform}}
+                                           @foreach($platforms as $platform)
+                                                @if($platform->id == $serie->platform)
+                                                    {{$platform->name}}
+                                                @endif
+                                           @endforeach
                                         </td>
 
                                         <td>
-                                            {{$serie->director}}
+                                        @foreach($directors as $director)
+                                                @if($director->id == $serie->director)
+                                                    {{$director->name}} {{$director->surname}}
+                                                @endif
+                                           @endforeach
                                         </td>
 
                                         <td>
-                                            {{$serie->actor}}
+                                            <ul>
+                                                @foreach($serie->serieActors as $serieActor)
+                                                <li> {{$serieActor->actor->name}} {{$serieActor->actor->surname}}</li>
+                                                @endforeach
+                                            </ul>
                                         </td>
 
                                         <td>
-                                            {{$serie->audio}}
+                                            <ul>
+                                                @foreach($serie->serieLanguages as $serieLanguage)
+                                                    @if($serieLanguage->tipo == 0)
+                                                        <li> {{$serieLanguage->language->name}}</li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
                                         </td>
 
                                         <td>
-                                            {{$serie->subtitle}}
+                                            <ul>
+                                                @foreach($serie->serieLanguages as $serieLanguage)
+                                                    @if($serieLanguage->tipo == 1)
+                                                        <li> {{$serieLanguage->language->name}}</li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
                                         </td>
 
                                         <td>

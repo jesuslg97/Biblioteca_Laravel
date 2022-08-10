@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actor;
+use App\Nationality;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
@@ -14,7 +15,7 @@ class ActorController extends Controller
     const PAGINATE_SIZE = 2;
 
     public function index(Request $request){
-
+        $nationalities = Nationality::all();
         $actorsName = null;
         if($request->has('actorName')) {
             $actorsName = $request->$actorsName;
@@ -24,11 +25,12 @@ class ActorController extends Controller
 
         }
 
-        return view('actors.index', ['actors'=>$actors, 'actorName'=>$actorsName]);
+        return view('actors.index', ['actors'=>$actors, 'actorName'=>$actorsName,'nationalities'=>$nationalities]);
     }
 
     public function create(){
-        return view('actors.create');
+        $nationalities = Nationality::all();
+        return view('actors.create',[ 'nationalities'=>$nationalities]);
     }
 
     public function store(Request $request){
@@ -45,7 +47,8 @@ class ActorController extends Controller
     }
 
     public function edit(Actor $actor){
-        return view('actors.edit', ['actor'=>$actor]);
+        $nationalities = Nationality::all();
+        return view('actors.edit', ['actor'=>$actor,'nationalities'=>$nationalities]);
     }
 
     public function update(Request $request, Actor $actor){
@@ -73,7 +76,7 @@ class ActorController extends Controller
             'actorName' => ['required', 'string', 'max:255', 'min:1'],
             'actorSurname' => ['required', 'string', 'max:255', 'min:1'],
             'actorDate' => ['required', 'date'],
-            'actorNationality' => ['required', 'string', 'max:255', 'min:1']
+            'actorNationality' => ['required', 'int']
         ]);
     }
 

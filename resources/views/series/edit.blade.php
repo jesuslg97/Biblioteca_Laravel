@@ -25,32 +25,95 @@
 
                             <div class="mb-3">
                                 <label for="seriePlatform" class="form-label">{{__('string.serie_platform')}}</label>
-                                <input id="seriePlatform" name="seriePlatform" type="text"
-                                       placeholder="{{__('string.serie_platform')}}" class="form-control" value="{{$serie->platform}}" required>
+                                </br>
+                                <select name="seriePlatform" id="seriePlatform" class="form-select" aria-label="Default select example">
+                          
+                                    @foreach($platforms as $platform)
+                                        @if($platform->id == $serie->platform)
+                                            <option selected value="{{$platform->id}}">{{$platform->name}}</option>
+                                        @else
+                                            <option value="{{$platform->id}}">{{$platform->name}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="mb-3">
                                 <label for="serieDirector" class="form-label">{{__('string.serie_director')}}</label>
-                                <input id="serieDirector" name="serieDirector" type="date"
-                                       placeholder="{{__('string.serie_director')}}" class="form-control" value="{{$serie->director}}" required>
+                                </br>
+                                <select name="serieDirector" id="serieDirector" class="form-select" aria-label="Default select example">
+                          
+                                    @foreach($directors as $director)
+                                        @if($director->id == $serie->director)
+                                            <option selected value="{{$platform->id}}">{{$director->name}} {{$director->surname}}</option>
+                                        @else
+                                            <option value="{{$platform->id}}">{{$director->name}} {{$director->surname}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="mb-3">
                                 <label for="serieActors" class="form-label">{{__('string.serie_actors')}}</label>
-                                <input id="serieActors" name="serieActosr" type="text"
-                                       placeholder="{{__('string.serie_actors')}}" class="form-control" value="{{$serie->actors}}" required>
+                                </br>
+                                <select name="serieActors[]" multiple id="serieActors" class="form-select" aria-label="Default select example">
+                                    @foreach($actors as $actor)
+                                        @php($existActor = false)
+                                        @foreach($serie->serieActors as $serieActor)
+                                            @if($actor->id == $serieActor->actor_id)
+                                                @php($existActor = true)
+                                            @endif
+                                        @endforeach
+
+                                        @if($existActor)
+                                            <option selected value="{{$actor->id}}">{{$actor->name}} {{$actor->surname}}</option>
+                                        @else
+                                            <option  value="{{$actor->id}}">{{$actor->name}} {{$actor->surname}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="mb-3">
                                 <label for="serieAudios" class="form-label">{{__('string.serie_audios')}}</label>
-                                <input id="serieAudios" name="serieAudios" type="date"
-                                       placeholder="{{__('string.serie_audios')}}" class="form-control" value="{{$serie->audios}}" required>
+                                </br>
+                                <select name="serieAudios[]" multiple id="serieAudios" class="form-select" aria-label="Default select example">
+                                    @foreach($languages as $language)
+                                        @php($existAudio = false)
+                                        @foreach($serie->serieLanguages as $serieLanguage)
+                                            @if(($language->id == $serieLanguage->language_id) && $serieLanguage->tipo == 0)
+                                                @php($existAudio = true)
+                                            @endif
+                                        @endforeach
+
+                                        @if($existAudio)
+                                            <option selected value="{{$actor->id}}">{{$language->name}}</option>
+                                        @else
+                                            <option value="{{$actor->id}}">{{$language->name}} </option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="mb-3">
                                 <label for="serieSubtitles" class="form-label">{{__('string.serie_subtitles')}}</label>
-                                <input id="serieSubtitles" name="serieSubtitles" type="text"
-                                       placeholder="{{__('string.serie_subtitles')}}" class="form-control" value="{{$serie->subtitle}}" required>
+                                </br>
+                                <select name="serieSubtitles[]" multiple id="serieSubtitles" class="form-select" aria-label="Default select example">
+                                    @foreach($languages as $language)
+                                        @php($existAudio = false)
+                                        @foreach($serie->serieLanguages as $serieLanguage)
+                                            @if(($language->id == $serieLanguage->language_id) && $serieLanguage->tipo == 1)
+                                                @php($existAudio = true)
+                                            @endif
+                                        @endforeach
+
+                                        @if($existAudio)
+                                            <option selected value="{{$actor->id}}">{{$language->name}}</option>
+                                        @else
+                                            <option value="{{$actor->id}}">{{$language->name}} </option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
 
                             <input type="submit" value="{{__('string.edit_btn')}}" class="btn btn-primary" name="createBtn">

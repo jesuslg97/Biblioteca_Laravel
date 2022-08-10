@@ -41,15 +41,15 @@
                                 @foreach($languages as $language)
                                     <tr>
                                         <td>
-                                            {{$languages->id}}
+                                            {{$language->id}}
                                         </td>
 
                                         <td>
-                                            {{$languages->name}}
+                                            {{$language->name}}
                                         </td>
 
                                         <td>
-                                            {{$languages->ISOcode}}
+                                            {{$language->ISOcode}}
                                         </td>
 
                                         <td>

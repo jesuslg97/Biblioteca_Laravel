@@ -37,8 +37,17 @@
 
                             <div class="mb-3">
                                 <label for="actorNationality" class="form-label">{{__('string.actor_nationality')}}</label>
-                                <input id="actorNationality" name="actorNationality" type="text"
-                                       placeholder="{{__('string.actor_nationality')}}" class="form-control" value="{{$actor->nationality}}" required>
+                                </br>
+                                <select name="actorNationality" id="actorNationality" class="form-select" aria-label="Default select example">
+                               
+                                    @foreach($nationalities as $nationality)
+                                    @if($nationality->id == $actor->nationality)
+                                        <option selected value="{{$nationality->id}}">{{$nationality->name}}</option>
+                                        @else
+                                        <option value="{{$nationality->id}}">{{$nationality->name}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
 
                             <input type="submit" value="{{__('string.edit_btn')}}" class="btn btn-primary" name="createBtn">

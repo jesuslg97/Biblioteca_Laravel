@@ -64,7 +64,7 @@ class PlatformController extends Controller
 
     protected function validatePlatform($request) {
         return Validator::make($request->all(), [
-            'platformName' => ['required', 'string', 'max:255', 'min:1']
+            'platformName' => ['required', 'string', 'max:5', 'min:1']
         ]);
     }
 

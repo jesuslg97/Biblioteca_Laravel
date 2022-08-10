@@ -25,6 +25,7 @@
                         @csrf
                         <input id="platformName" name="platformName" class="form-control"
                         value="@isset($platformName) {{$platformName}} @endisset" placeholder="{{__('string.search_platform_name_placeholder')}}" />
+                        <button type="submit" class="btn btn-primary">{{__('string.search_btn')}}</button>
                     </form>
                 </div>
                 <div class="table-responsive mt-3">

@@ -5,98 +5,85 @@
 @endsection
 
 @section('content')
-    <div class="row mb-5">
-        <div class="col">
-            <div class="card shadow">
-                <div class="card-header border-0">
-                    <div class="row">
-                        <h1>{{__('string.list_title_actor')}}</h1>
+    <div class="container">
+        <div class="row card shadow">
+
+            <div class="col-12 text-center mt-3">
+                <h1>{{__('string.list_title_actor')}}</h1>
+            </div>
+
+            <div class="col-md-4 form-inline">
+                <form action="" method="post">
+                    @csrf
+                    <input id="actorName" name="actorName" class="form-control"
+                           value="@isset($actorName) {{$actorName}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
+                    <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
+                </form>
+            </div>
+
+            <div class="col-12">
+                @if(count($actors) > 0)
+                    <table class="table table-striped text-center mt-3">
+                        <thead>
+                            <th>{{__('string.id_header')}}</th>
+                            <th>{{__('string.name_header')}}</th>
+                            <th>{{__('string.surname_header')}}</th>
+                            <th>{{__('string.date_header')}}</th>
+                            <th>{{__('string.nationality_header')}}</th>
+                            <th colspan="2">{{__('string.actions_header')}}</th>
+                        </thead>
+
+                        <tbody>
+                            @foreach($actors as $actor)
+                                <tr>
+                                    <td>{{$actor->id}}</td>
+                                    <td>{{$actor->name}}</td>
+                                    <td>{{$actor->surname}}</td>
+                                    <td>{{$actor->date}}</td>
+                                    <td>
+                                        @foreach($nationalities as $nationality)
+                                            @if($actor->nationality == $nationality->id)
+                                                {{ $nationality->name}}
+                                           @endif
+                                       @endforeach
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success" href="{{ route('actors.edit', $actor) }}">Editar</a>
+
+                                        <form id="delete-form-{{ $actor->id }}" action="{{ route('actors.delete', [$actor]) }}"
+                                              method="post" style="display: inline-block">
+                                            {{ method_field('delete') }}
+                                            {{ csrf_field() }}
+                                            <button type="submit" class="btn btn-danger">{{__('string.delete_btn')}}</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <div class="alert alert-warning mt-2" role="alert">
+                        Aún no existen actores.
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <a class ="header__link btn btn-success" href="{{route('actors.create')}}">
-                                {{__('string.create_actor')}}<i class="fas fa-plus"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="col-md-6">
-                        <form action="" method="post">
-                            @csrf
-                            <input id="actorName" name="actorName" class="form-control"
-                                   value="@isset($actorName) {{$actorName}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
-                        </form>
-                    </div>
+                @endif
+            </div>
 
-                    <div class="table-responsive mt-3">
-                        @if(count($actors) > 0)
-                            <table class="table table-striped align-items-center">
-                                <thead>
-                                <th>{{__('string.id_header')}}</th>
-                                <th>{{__('string.name_header')}}</th>
-                                <th>{{__('string.surname_header')}}</th>
-                                <th>{{__('string.date_header')}}</th>
-                                <th>{{__('string.nationality_header')}}</th>
-                                <th>{{__('string.actions_header')}}</th>
-                                </thead>
-                                <tbody>
-                                @foreach($actors as $actor)
-                                    <tr>
-                                        <td>
-                                            {{$actor->id}}
-                                        </td>
-
-                                        <td>
-                                            {{$actor->name}}
-                                        </td>
-
-                                        <td>
-                                            {{$actor->surname}}
-                                        </td>
-
-                                        <td>
-                                            {{$actor->date}}
-                                        </td>
-
-                                        <td>
-                                            
-                                            @foreach($nationalities as $nationality)
-                                                @if($actor->nationality == $nationality->id)
-                                                    {{ $nationality->name}}
-                                                @endif
-                                            @endforeach
-                                        </td>
-
-                                        <td>
-                                            <a class="btn btn-success" href="{{ route('actors.edit', $actor) }}">
-                                                Editar
-                                            </a>
-
-                                            <form id="delete-form-{{ $actor->id }}"
-                                                  action="{{ route('actors.delete', [$actor]) }}"
-                                                  method="post" style="display: inline-block">
-                                                {{ method_field('delete') }}
-                                                {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger">{{__('string.delete_btn')}}</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+            <div class="row my-3 pr-3">
+                <div class="col">
+                    <div class="float-right">
+                        @if($actors instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                            {{$actors->links()}}
                         @endif
-                    </div>
-                    <div class="row my-3 pr-3">
-                        <div class="col">
-                            <div class="float-right">
-                                @if($actors instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                                    {{$actors->links()}}
-                                @endif
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="col-12 text-center mb-2">
+                <a class ="header__link btn btn-primary" href="{{route('actors.create')}}">
+                    {{__('string.create_actor')}}<i class="fas fa-plus"></i></a>
+                <a class="btn btn-warning text-white" href="{{ url()->previous() }}">Volver</a>
+            </div>
+
         </div>
     </div>
 @endsection

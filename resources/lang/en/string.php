@@ -20,6 +20,7 @@ return [
     'create_bn' => 'Crear',
     'edit_btn' => 'Editar',
     'delete_btn' => 'Borrar',
+    'search_btn' => 'Buscar',
 
     //TITLES
     'list_title_platform' =>'Lista de plataformas',

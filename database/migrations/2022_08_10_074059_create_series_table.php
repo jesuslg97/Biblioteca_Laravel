@@ -15,9 +15,12 @@ class CreateSeriesTable extends Migration
     {
         Schema::create('series', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->integer('director');
-            $table->integer('platform');
+            $table->string('title')->nullable(false);
+            $table->unsignedBigInteger('platform')->nullable();
+            $table->foreign('platform')->references('id')->on('platforms');
+            $table->unsignedBigInteger('director')->nullable();
+            $table->foreign('director')->references('id')->on('directors');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

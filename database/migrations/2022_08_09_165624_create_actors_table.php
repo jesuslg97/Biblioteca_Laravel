@@ -15,10 +15,12 @@ class CreateActorsTable extends Migration
     {
         Schema::create('actors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('surname');
-            $table->date('date');
-            $table->string('nationality');
+            $table->string('name')->nullable(false);
+            $table->string('surname')->nullable(false);
+            $table->date('date')->nullable(false);
+            $table->unsignedBigInteger('nationality')->nullable();
+            $table->foreign('nationality')->references('id')->on('nationalities');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

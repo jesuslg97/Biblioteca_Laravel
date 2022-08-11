@@ -15,9 +15,11 @@ class CreateLanguagesTable extends Migration
     {
         Schema::create('languages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->unique('ISOcode');
+            $table->string('name')->nullable(false);
+            $table->string('ISO_code', 2)->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
+            $table->unique(["ISO_code", "delete_at"], 'ISO_code_unique');
         });
     }
 

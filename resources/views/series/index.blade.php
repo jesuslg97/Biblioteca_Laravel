@@ -100,7 +100,7 @@
                                     </td>
 
                                     <td>
-                                        <a class="btn btn-success" href="{{ route('series.edit', $serie) }}">Editar</a>
+                                        <a class="btn btn-success" href="{{ route('series.edit', $serie->id) }}">Editar</a>
 
                                         <form id="delete-form-{{ $serie->id }}" action="{{ route('series.delete', [$serie]) }}"
                                           method="post" style="display: inline-block">

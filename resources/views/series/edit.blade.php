@@ -44,9 +44,9 @@
 
                             @foreach($directors as $director)
                                 @if($director->id == $serie->director)
-                                    <option selected value="{{$platform->id}}">{{$director->name}} {{$director->surname}}</option>
+                                    <option selected value="{{$director->id}}">{{$director->name}} {{$director->surname}}</option>
                                 @else
-                                    <option value="{{$platform->id}}">{{$director->name}} {{$director->surname}}</option>
+                                    <option value="{{$director->id}}">{{$director->name}} {{$director->surname}}</option>
                                 @endif
                             @endforeach
                         </select>

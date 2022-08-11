@@ -17,7 +17,7 @@ use \Validator;
 
 class SerieController extends Controller
 {
-    const PAGINATE_SIZE = 2;
+    const PAGINATE_SIZE = 10;
 
     public function index(Request $request){
         $directors = Director::all();
@@ -67,28 +67,113 @@ class SerieController extends Controller
                 $dirId = '';
             }
 
-            if($request->has('serieAudio')  && !empty($serieAudio)){
-                $directorId = Director::where('name','=',$serieDirector)->get()->first();
-                if($directorId){
-                    $dirId = $directorId->id;
+            //Actores
+            if($request->has('serieActor')  && !empty($serieActor)){
+                $actorId = Actor::where('name','=',$serieActor)->get()->first();
+                if($actorId){
+                    $actId = $actorId->id;
                 }else{
-                    $dirId = 0;
+                    $actId = 0;
                 }
                
             }else{
-                $dirId = '';
+                $actId = '';
             }
 
+            $sActor = [];
+            if( $actId != 0){
+               
+                $seriesActor = serieActor::where('actor_id','=',$actId)->get();
+                foreach($seriesActor as $sa){
+                    array_push($sActor,$sa->serie_id);
+                }
 
+                if($sActor == []){
+                    $s = Serie::all();
+                    foreach($s as $serie){
+                        array_push($sActor,$serie->id);
+                    }
+                }
+            }else{
+                array_push($sActor,0);
+            }
+            //Fin actores
+
+
+        
+            //Audio
+            if($request->has('serieAudio')  && !empty($serieAudio)){
+                $audioId = Language::where('name','=',$serieAudio)->get()->first();
+                if($audioId){
+                    $audId = $audioId->id;
+                }else{
+                    $audId = 0;
+                }
+               
+            }else{
+                $audId = '';
+            }
+
+            $sAudio = [];
+            if($audId != 0){
+                $seriesAudio = serieLanguage::where('language_id','=',$audId)->where('tipo','=',0)->get();
+               
+                foreach($seriesAudio as $sa){
+                    array_push($sAudio,$sa->serie_id);
+                }
+
+                if($sAudio == []){
+                    $s = Serie::all();
+                    foreach($s as $serie){
+                        array_push($sAudio,$serie->id);
+                    }
+                }
+            }else{
+                array_push($sAudio,0);
+            }
+           
+            //Fin audio
+
+            //Subtitulos
+
+            if($request->has('serieSubtitle')  && !empty($serieSubtitle)){
+                $subtitleId = Language::where('name','=',$serieSubtitle)->get()->first();
+                if($subtitleId){
+                    $subId = $subtitleId->id;
+                }else{
+                    $subId = 0;
+                }
+               
+            }else{
+                $subId = '';
+            }
+
+            $sSub = [];
+            if($subId != 0){
+                $seriesSub = serieLanguage::where('language_id','=',$subId)->where('tipo','=',1)->get();
+               
+                foreach($seriesSub as $sa){
+                    array_push($sSub,$sa->serie_id);
+                }
+
+                if($sSub == []){
+                    $s = Serie::all();
+                    foreach($s as $serie){
+                        array_push($sSub,$serie->id);
+                    }
+                }
+            }else{
+                array_push($sSub,0);
+            }
+
+            //Fin subtitulos
 
             $series = Serie::where('title', 'like', '%'. $serieTitle . '%')
             ->where('director','like', '%'. $dirId . '%' )
             ->where('platform', 'like', '%'. $platId . '%')
-            ->join('serie_languages',function ($join){
-                $join->on('series.id','=','serie_languages.serie_id')
-                ->where('serie_languages.language_id','=',1)
-                ->where('serie_languages.tipo','=',0);
-            })
+            ->whereIn('id', $sActor)
+            ->whereIn('id', $sAudio)
+            ->whereIn('id', $sSub)
             ->paginate(self::PAGINATE_SIZE);
         } else {
             $series = Serie::paginate(self::PAGINATE_SIZE);

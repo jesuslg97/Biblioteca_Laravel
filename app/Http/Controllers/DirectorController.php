@@ -12,7 +12,7 @@ use \Validator;
 
 class DirectorController extends Controller
 {
-    const PAGINATE_SIZE = 2;
+    const PAGINATE_SIZE = 10;
 
     public function index(Request $request){
         

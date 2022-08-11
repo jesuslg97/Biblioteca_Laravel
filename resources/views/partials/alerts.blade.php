@@ -3,7 +3,7 @@ use App\ErrorSession;
 ?>
 @if(Session::has(ErrorSession::SUCCESS_COD))
     <div class="container">
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-md-10 col-md-offset-1">
                 <div class="alert alert-success alert-dismissible" role="alert">
                     <button type="button" class="close"  data-dismiss="alert" arial-label="Close">
@@ -18,7 +18,7 @@ use App\ErrorSession;
 
 @if(Session::has(ErrorSession::INFO_COD))
     <div class="container">
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-md-10 col-md-offset-1">
                 <div class="alert alert-info alert-dismissible" role="alert">
                     <button type="button" class="close"  data-dismiss="alert" arial-label="Close">
@@ -33,7 +33,7 @@ use App\ErrorSession;
 
 @if(Session::has(ErrorSession::WARNING_COD))
     <div class="container">
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-md-10 col-md-offset-1">
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close"  data-dismiss="alert" arial-label="Close">
@@ -48,7 +48,7 @@ use App\ErrorSession;
 
 @if(Session::has(ErrorSession::DANGER_COD))
     <div class="container">
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-md-10 col-md-offset-1">
                 <div class="alert alert-danger alert-dismissible" role="alert">
                     <button type="button" class="close"  data-dismiss="alert" arial-label="Close">

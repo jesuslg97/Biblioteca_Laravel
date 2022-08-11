@@ -14,10 +14,10 @@ return [
     */
 
     //GENERAL
-    'successful_message' => 'Mensaje Satisfactorio',
-    'info_message' => 'Mensaje de información',
-    'warning_message' => 'Mensaje de advertencia',
-    'danger_message' => 'Mensaje de error',
+    'successful_message' => 'Correcto: ',
+    'info_message' => 'Mensaje de información: ',
+    'warning_message' => 'Mensaje de advertencia: ',
+    'danger_message' => 'Incorrecto: ',
 
     //PLATFORM
     'platforms_created_successfully' => 'Plataforma creada correctamente',

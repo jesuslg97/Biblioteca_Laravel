@@ -16,15 +16,20 @@ class LanguageController extends Controller
     public function index(Request $request){
 
         $languagesName = null;
-        if($request->has('languageName')) {
-            $languagesName = $request->$languagesName;
-            $languages = Language::where('name', 'like', '%'. $languagesName . '%')->paginate(self::PAGINATE_SIZE);
+        $isoCode = null;
+        if($request->has('languageName') || $request->has('isoCode')) {
+            $languagesName = $request->languageName;
+            $isoCode = $request->isoCode;
+
+            $languages = Language::where('name', 'like', '%'. $languagesName . '%')
+            ->where('ISOcode', 'like', '%'. $isoCode . '%')
+            ->paginate(self::PAGINATE_SIZE);
         } else {
             $languages = Language::paginate(self::PAGINATE_SIZE);
 
         }
 
-        return view('languages.index', ['languages'=>$languages, 'languageName'=>$languagesName]);
+        return view('languages.index', ['languages'=>$languages, 'languageName'=>$languagesName,'isoCode'=>$isoCode]);
     }
 
     public function create(){

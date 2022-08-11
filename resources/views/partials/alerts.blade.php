@@ -61,5 +61,24 @@ use App\ErrorSession;
     </div>
 @endif
 
+<!-- MENSAJE ANY -->
+@if ($errors->any())
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+                    <strong>{{ __('alerts.error_message') }}</strong>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
+
 
 

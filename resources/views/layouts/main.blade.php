@@ -19,6 +19,7 @@
     <body>
         <div class="flex-center position-ref full-height">
             <div id="app" class="content">
+                @include('layouts.app')
                 @include('partials.alerts')
                 @yield('content')
                 @include('partials.footer')
@@ -27,3 +28,7 @@
 
     </body>
 </html>
+
+<script>
+    
+</script>

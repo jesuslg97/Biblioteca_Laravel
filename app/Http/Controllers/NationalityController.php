@@ -17,7 +17,7 @@ class NationalityController extends Controller
 
         $nationalityName = null;
         if($request->has('nationalityName')) {
-            $nationalityName = $request->$nationalityName;
+            $nationalityName = $request->nationalityName;
             $nationalities = Nationality::where('name', 'like', '%'. $nationalityName . '%')->paginate(self::PAGINATE_SIZE);
         } else {
             $nationalities = Nationality::paginate(self::PAGINATE_SIZE);

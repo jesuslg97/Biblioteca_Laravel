@@ -13,7 +13,7 @@
             </div>
 
             <div class="offset-md-4 col-4 mt-3">
-                <form name="create_platform" action="{{ route('platforms.update',$platform) }}" method="post">
+                <form id="editPlatforms" name="create_platform" action="{{ route('platforms.update',$platform) }}" method="post">
                     @csrf
                     <div class="mb-3">
                         <label for="platformName" class="form-label">{{__('string.platform_name')}}</label>
@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="col-12 text-center mb-2">
-                        <input type="submit" value="{{__('string.edit_btn')}}" class="btn btn-primary" name="createBtn">
+                        <input onclick="modal()" type="button" value="{{__('string.edit_btn')}}" class="btn btn-primary" name="createBtn">
                         <a class="btn btn-warning text-white" href="{{ url()->previous() }}">Volver</a>
                     </div>
 
@@ -31,3 +31,6 @@
         </div>
     </div>
 @endsection
+<script>
+   
+</script>

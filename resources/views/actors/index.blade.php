@@ -13,11 +13,18 @@
             </div>
 
             <div class="col-md-4 form-inline">
-                <form action="" method="post">
+                <form action="{{route('actors.index')}}" method="post">
                     @csrf
                     <input id="actorName" name="actorName" class="form-control"
                            value="@isset($actorName) {{$actorName}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
-                    <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
+                    
+                           <input id="actorSurname" name="actorSurname" class="form-control"
+                           value="@isset($actorSurname) {{$actorSurname}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
+                    <input type ="date" id="actorDate" name="actorDate" class="form-control"
+                           value="@isset($actorDate) {{$actorDate}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
+                    <input id="actorNationality" name="actorNationality" class="form-control"
+                           value="@isset($actorNationality) {{$actorNationality}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
+                           <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
                 </form>
             </div>
 
@@ -39,7 +46,7 @@
                                     <td>{{$actor->id}}</td>
                                     <td>{{$actor->name}}</td>
                                     <td>{{$actor->surname}}</td>
-                                    <td>{{$actor->date}}</td>
+                                    <td>{{date('d/m/Y', strtotime($actor->date))}}</td>
                                     <td>
                                         @foreach($nationalities as $nationality)
                                             @if($actor->nationality == $nationality->id)

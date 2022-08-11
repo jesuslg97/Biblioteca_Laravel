@@ -13,7 +13,7 @@
             </div>
 
             <div class="col-md-4 form-inline">
-                <form action="" method="post">
+                <form action="{{route('platforms.index')}}" method="post">
                     @csrf
                     <input id="platformName" name="platformName" class="form-control"
                            value="@isset($platformName) {{$platformName}} @endisset" placeholder="{{__('string.search_platform_name_placeholder')}}" />

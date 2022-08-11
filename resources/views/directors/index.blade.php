@@ -13,10 +13,16 @@
             </div>
 
             <div class="col-md-4 form-inline">
-                <form action="" method="post">
+                <form action="{{route('directors.index')}}" method="post">
                     @csrf
                     <input id="directorName" name="directorName" class="form-control"
                            value="@isset($directorName) {{$directorName}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
+                    <input id="directorSurname" name="directorSurname" class="form-control"
+                           value="@isset($directorSurname) {{$directorSurname}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
+                    <input type ="date" id="directorDate" name="directorDate" class="form-control"
+                           value="@isset($directorDate) {{$directorDate}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
+                    <input id="directorNationality" name="directorNationality" class="form-control"
+                           value="@isset($directorNationality) {{$directorNationality}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
                     <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
                 </form>
             </div>
@@ -39,7 +45,8 @@
                                     <td>{{$director->id}}</td>
                                     <td>{{$director->name}}</td>
                                     <td>{{$director->surname}}</td>
-                                    <td>{{$director->date}}</td>
+                                    
+                                    <td>{{date('d/m/Y', strtotime($director->date))}}</td>
                                     <td>
                                         @foreach($nationalities as $nationality)
                                             @if($director->nationality == $nationality->id)

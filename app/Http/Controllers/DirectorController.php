@@ -15,19 +15,44 @@ class DirectorController extends Controller
     const PAGINATE_SIZE = 2;
 
     public function index(Request $request){
-
+        
         $nationalities = Nationality::all();
         $directorsName = null;
-        if($request->has('directorName')) {
-            $directorsName = $request->$directorsName;
-            $directors = Director::where('name', 'like', '%'. $directorsName . '%')->paginate(self::PAGINATE_SIZE);
+        $directorSurname = null;
+        $directorDate = null;
+        $directorNationality = null;
+        if($request->has('directorName') || $request->has('directorSurname') || $request->has('directorDate') || $request->has('directorNationality')) {
+            $directorsName = $request->directorName;
+            $directorSurname = $request->directorSurname;
+            $directorDate = $request->directorDate;
+            $directorNationality = $request->directorNationality;
+            if($request->has('directorNationality') && !empty($directorNationality)){
+                $nationalityId = Nationality::where('name','=',$directorNationality)->get()->first();
+                if($nationalityId){
+                    $id = $nationalityId->id;
+                }else{
+                    
+                    $id = 0;
+                }
+               
+            }else{
+             
+                $id = '';
+            }
+         
+           
+            $directors = Director::where('name', 'like', '%'. $directorsName . '%')
+            ->where('surname', 'like', '%'. $directorSurname . '%')
+            ->where('date', 'like', '%'. $directorDate . '%')
+            ->where('nationality', 'like', '%'. $id . '%')
+            ->paginate(self::PAGINATE_SIZE);
         } else {
             $directors = Director::paginate(self::PAGINATE_SIZE);
             
 
         }
         
-        return view('directors.index', ['directors'=>$directors, 'directorName'=>$directorsName,'nationalities'=>$nationalities]);
+        return view('directors.index', ['directors'=>$directors, 'directorName'=>$directorsName,'nationalities'=>$nationalities,'directorSurname'=>$directorSurname,'directorDate'=>$directorDate,'directorNationality'=>$directorNationality]);
     }
 
     public function create(){

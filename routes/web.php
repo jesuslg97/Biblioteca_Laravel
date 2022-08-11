@@ -12,10 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
-Route::prefix('platforms')->middleware('auth')->group(function () {
+Route::prefix('platforms')->group(function () {
     Route::match(['get', 'post'], '/', 'PlatformController@index')->name('platforms.index');
     Route::get('/create', 'PlatformController@create')->name('platforms.create');
     Route::post('/store', 'PlatformController@store')->name('platforms.store');

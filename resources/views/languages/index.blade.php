@@ -13,10 +13,12 @@
             </div>
 
             <div class="col-md-4 form-inline">
-                <form action="" method="post">
+                <form action="{{route('languages.index')}}" method="post">
                     @csrf
                     <input id="languageName" name="languageName" class="form-control"
                            value="@isset($languageName) {{$languageName}} @endisset" placeholder="{{__('string.search_language_name_placeholder')}}" />
+                    <input id="isoCode" name="isoCode" class="form-control"
+                           value="@isset($isoCode) {{$isoCode}} @endisset" placeholder="{{__('string.search_language_name_placeholder')}}" />
                     <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
                 </form>
             </div>
@@ -27,7 +29,7 @@
                         <thead>
                         <th>{{__('string.id_header')}}</th>
                         <th>{{__('string.name_header')}}</th>
-                        <th>{{__('string.ISOcode_header')}}</th>>
+                        <th>{{__('string.language_ISO')}}</th>>
                         <th colspan="2">{{__('string.actions_header')}}</th>
                         </thead>
 

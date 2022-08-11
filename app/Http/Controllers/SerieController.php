@@ -26,15 +26,76 @@ class SerieController extends Controller
         $languages = Language::all();
 
         $serieTitle = null;
-        if($request->has('serieTitle')) {
-            $serieTitle = $request->$serieTitle;
-            $series = Serie::where('name', 'like', '%'. $serieTitle . '%')->paginate(self::PAGINATE_SIZE);
+        $seriePlatform = null;
+        $serieDirector = null;
+        $serieActor = null;
+        $serieAudio = null;
+        $serieSubtitle = null;
+
+        if($request->has('serieTitle') || $request->has('seriePlatform') 
+        ||$request->has('serieDirector') ||$request->has('serieActor')
+        ||$request->has('serieAudio') ||$request->has('serieSubtitle')) {
+
+            $serieTitle = $request->serieTitle;
+            $seriePlatform = $request->seriePlatform;
+            $serieDirector =$request->serieDirector;
+            $serieActor = $request->serieActor;
+            $serieAudio =$request->serieAudio;
+            $serieSubtitle =$request->serieSubtitle;
+
+            if($request->has('seriePlatform')  && !empty($seriePlatform)){
+                $platformId = Platform::where('name','=',$seriePlatform)->get()->first();
+                if($platformId){
+                    $platId = $platformId->id;
+                }else{
+                    $platId = 0;
+                }
+               
+            }else{
+                $platId = '';
+            }
+
+            if($request->has('serieDirector')  && !empty($serieDirector)){
+                $directorId = Director::where('name','=',$serieDirector)->get()->first();
+                if($directorId){
+                    $dirId = $directorId->id;
+                }else{
+                    $dirId = 0;
+                }
+               
+            }else{
+                $dirId = '';
+            }
+
+            if($request->has('serieAudio')  && !empty($serieAudio)){
+                $directorId = Director::where('name','=',$serieDirector)->get()->first();
+                if($directorId){
+                    $dirId = $directorId->id;
+                }else{
+                    $dirId = 0;
+                }
+               
+            }else{
+                $dirId = '';
+            }
+
+
+
+            $series = Serie::where('title', 'like', '%'. $serieTitle . '%')
+            ->where('director','like', '%'. $dirId . '%' )
+            ->where('platform', 'like', '%'. $platId . '%')
+            ->join('serie_languages',function ($join){
+                $join->on('series.id','=','serie_languages.serie_id')
+                ->where('serie_languages.language_id','=',1)
+                ->where('serie_languages.tipo','=',0);
+            })
+            ->paginate(self::PAGINATE_SIZE);
         } else {
             $series = Serie::paginate(self::PAGINATE_SIZE);
 
         }
 
-        return view('series.index', ['series'=>$series, 'serieTitle'=>$serieTitle,'directors'=>$directors,'actors'=>$actors,'platforms'=>$platforms,'languages'=>$languages]);
+        return view('series.index', ['series'=>$series, 'serieTitle'=>$serieTitle,'directors'=>$directors,'actors'=>$actors,'platforms'=>$platforms,'languages'=>$languages,'seriePlatform'=> $seriePlatform,'serieDirector'=>$serieDirector,'serieActor'=>$serieActor,'serieAudio'=>$serieAudio,'serieSubtitle'=>$serieSubtitle]);
     }
 
     public function create(){
@@ -131,6 +192,8 @@ class SerieController extends Controller
     public function delete(Request $request, Serie $serie){
         if($serie != null) {
             $serie->delete();
+            serieActor::where('serie_id','=',$serie->id)->delete();
+            serieLanguage::where('serie_id','=',$serie->id)->delete();
             return redirect()->route('series.index')->with('success', Lang::get('alerts.series_delete_successfully'));
         }
         return redirect()->route('series.index')->with('error', Lang::get('alerts.series_delete_error'));
@@ -138,12 +201,12 @@ class SerieController extends Controller
 
     protected function validateSerie($request) {
         return Validator::make($request->all(), [
-            'serieTitle' => ['required', 'string', 'max:255', 'min:1']
-            //'seriePlatform' => ['required', 'string', 'max:255', 'min:1']
-            //'serieDirector' => ['required', 'string', 'max:255', 'min:1']
-            //'serieActors' => ['required', 'string', 'max:255', 'min:1']
-            //'serieAudios' => ['required', 'string', 'max:255', 'min:1']
-            //'serieSubtitles' => ['required', 'string', 'max:255', 'min:1']
+            'serieTitle' => ['required', 'string', 'max:255', 'min:1'],
+            'seriePlatform' => ['required'],
+            'serieDirector' => ['required'],
+            'serieActors' => ['required'],
+            'serieAudios' => ['required'],
+            'serieSubtitles' => ['required']
         ]);
     }
 }

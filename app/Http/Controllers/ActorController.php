@@ -17,15 +17,36 @@ class ActorController extends Controller
     public function index(Request $request){
         $nationalities = Nationality::all();
         $actorsName = null;
-        if($request->has('actorName')) {
-            $actorsName = $request->$actorsName;
-            $actors = Actor::where('name', 'like', '%'. $actorsName . '%')->paginate(self::PAGINATE_SIZE);
+        $actorSurname = null;
+        $actorDate = null;
+        $actorNationality = null;
+        if($request->has('actorName') || $request->has('actorSurname') || $request->has('actorDate') || $request->has('actorNationality')) {
+            $actorsName = $request->actorName;
+            $actorSurname = $request->actorSurname;
+            $actorDate = $request->actorDate;
+            $actorNationality = $request->actorNationality;
+            if($request->has('actorNationality') && !empty($actorNationality)){
+                $nationalityId = Nationality::where('name','=',$actorNationality)->get()->first();
+                if($nationalityId){
+                    $id = $nationalityId->id;
+                }else{
+                    $id = 0;
+                }
+               
+            }else{
+                $id = '';
+            }
+            $actors = Actor::where('name', 'like', '%'. $actorsName . '%')
+            ->where('surname', 'like', '%'. $actorSurname . '%')
+            ->where('date', 'like', '%'. $actorDate . '%')
+            ->where('nationality', 'like', '%'. $id . '%' )
+            ->paginate(self::PAGINATE_SIZE);
         } else {
             $actors = Actor::paginate(self::PAGINATE_SIZE);
 
         }
 
-        return view('actors.index', ['actors'=>$actors, 'actorName'=>$actorsName,'nationalities'=>$nationalities]);
+        return view('actors.index', ['actors'=>$actors, 'actorName'=>$actorsName,'nationalities'=>$nationalities,'actorSurname'=>$actorSurname,'actorDate'=>$actorDate,'actorNationality'=>$actorNationality]);
     }
 
     public function create(){

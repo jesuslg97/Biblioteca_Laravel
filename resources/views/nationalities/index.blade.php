@@ -13,7 +13,7 @@
             </div>
 
             <div class="col-md-4 form-inline">
-                <form action="" method="post">
+                <form action="{{route('nationalities.index')}}" method="post">
                     @csrf
                     <input id="nationalityName" name="nationalityName" class="form-control"
                            value="@isset($nationalityName) {{$nationalityName}} @endisset" placeholder="{{__('string.search_nationality_name_placeholder')}}" />

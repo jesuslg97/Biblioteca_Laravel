@@ -17,7 +17,8 @@ class PlatformController extends Controller
 
         $platformName = null;
         if($request->has('platformName')) {
-            $platformName = $request->$platformName;
+            
+            $platformName = $request->platformName;
             $platforms = Platform::where('name', 'like', '%'. $platformName . '%')->paginate(self::PAGINATE_SIZE);
         } else {
             $platforms = Platform::paginate(self::PAGINATE_SIZE);
@@ -64,7 +65,7 @@ class PlatformController extends Controller
 
     protected function validatePlatform($request) {
         return Validator::make($request->all(), [
-            'platformName' => ['required', 'string', 'max:5', 'min:1']
+            'platformName' => ['required', 'string', 'max:255', 'min:1']
         ]);
     }
 

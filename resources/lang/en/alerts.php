@@ -18,6 +18,7 @@ return [
     'info_message' => 'Mensaje de información: ',
     'warning_message' => 'Mensaje de advertencia: ',
     'danger_message' => 'Incorrecto: ',
+    'error_message' => 'Error',
 
     //PLATFORM
     'platforms_created_successfully' => 'Plataforma creada correctamente',

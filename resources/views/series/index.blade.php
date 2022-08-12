@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row card shadow" style="width: 1237px;">
+        <div class="row card shadow">
 
             <div class="col-12 text-center mt-3">
                 <h1>{{__('string.list_title_serie')}}</h1>
@@ -131,7 +131,7 @@
                                     </td>
 
                                     <td>
-                                        <a class="btn btn-success" href="{{ route('series.edit', $serie->id) }}">Editar</a>
+                                        <a class="btn btn-success mb-1" href="{{ route('series.edit', $serie->id) }}">Editar</a>
 
                                         <form id="delete-form-{{ $serie->id }}" action="{{ route('series.delete', [$serie]) }}"
                                           method="post" style="display: inline-block">

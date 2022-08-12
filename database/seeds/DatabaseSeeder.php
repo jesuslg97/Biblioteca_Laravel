@@ -335,5 +335,14 @@ class DatabaseSeeder extends Seeder
             'updated_at' => now()
         ]);
 
+        DB::table('users')->insert([
+            'id' => 1,
+            'name'  => 'test',
+            'email'  => 'test@test.com',
+            'password'  => '$2y$10$WhYXNBn5M6ThrY3spgIjlez.CDl2AvcN4ZjQyhfIPtuHngFaiI22a',
+            'created_at'  => now(),
+            'updated_at'  => now()
+        ]);
+
     }
 }

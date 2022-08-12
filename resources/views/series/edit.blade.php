@@ -86,9 +86,9 @@
                                 @endforeach
 
                                 @if($existAudio)
-                                    <option selected value="{{$actor->id}}">{{$language->name}}</option>
+                                    <option selected value="{{$language->id}}">{{$language->name}}</option>
                                 @else
-                                    <option value="{{$actor->id}}">{{$language->name}} </option>
+                                    <option value="{{$language->id}}">{{$language->name}} </option>
                                 @endif
                             @endforeach
                         </select>
@@ -107,9 +107,9 @@
                                 @endforeach
 
                                 @if($existAudio)
-                                    <option selected value="{{$actor->id}}">{{$language->name}}</option>
+                                    <option selected value="{{$language->id}}">{{$language->name}}</option>
                                 @else
-                                    <option value="{{$actor->id}}">{{$language->name}} </option>
+                                    <option value="{{$language->id}}">{{$language->name}} </option>
                                 @endif
                             @endforeach
                         </select>

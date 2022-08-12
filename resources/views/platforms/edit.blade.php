@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="col-12 text-center mb-2">
-                        <input onclick="modal()" type="button" value="{{__('string.edit_btn')}}" class="btn btn-primary" name="createBtn">
+                        <input type="submit" value="{{__('string.edit_btn')}}" class="btn btn-primary" name="createBtn">
                         <a class="btn btn-warning text-white" href="{{ url()->previous() }}">Volver</a>
                     </div>
 

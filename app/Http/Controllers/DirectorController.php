@@ -100,6 +100,42 @@ class DirectorController extends Controller
         return redirect()->route('directors.index')->with('error', Lang::get('alerts.directors_delete_error'));
     }
 
+    public function find(Request $request){
+        
+        $nationalities = Nationality::all();
+        $directorsName = null;
+        if($request->has('directorFind')) {
+            $directorsName = $request->directorFind;
+            
+            if($request->has('directorFind') && !empty($directorsName)){
+                $nationalityId = Nationality::where('name','=',$directorsName)->get()->first();
+                if($nationalityId){
+                    $id = $nationalityId->id;
+                }else{
+                    
+                    $id = 0;
+                }
+               
+            }else{
+             
+                $id = '';
+            }
+         
+            
+            $directors = Director::where('name', 'like', '%'. $directorsName . '%')
+            ->orWhere('surname', 'like', '%'. $directorsName . '%')
+            ->orWhere('date', 'like', '%'. $directorsName . '%')
+            ->orWhere('nationality', 'like', '%'. $id . '%')
+            ->paginate(self::PAGINATE_SIZE);
+        } else {
+            $directors = Director::paginate(self::PAGINATE_SIZE);
+            
+
+        }
+        
+        return view('directors.index', ['directors'=>$directors, 'directorFind'=>$directorsName,'nationalities'=>$nationalities]);
+    }
+
     protected function validateDirector($request) {
         return Validator::make($request->all(), [
             'directorName' => ['required', 'string', 'max:255', 'min:1'],

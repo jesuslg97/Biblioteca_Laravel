@@ -92,6 +92,42 @@ class ActorController extends Controller
         return redirect()->route('actors.index')->with('error', Lang::get('alerts.actors_delete_error'));
     }
 
+    public function find(Request $request){
+        
+        $nationalities = Nationality::all();
+        $actorsName = null;
+        if($request->has('actorFind')) {
+            $actorsName = $request->actorFind;
+            
+            if($request->has('actorFind') && !empty($actorsName)){
+                $nationalityId = Nationality::where('name','=',$actorsName)->get()->first();
+                if($nationalityId){
+                    $id = $nationalityId->id;
+                }else{
+                    
+                    $id = 0;
+                }
+               
+            }else{
+             
+                $id = '';
+            }
+         
+            
+            $actors = actor::where('name', 'like', '%'. $actorsName . '%')
+            ->orWhere('surname', 'like', '%'. $actorsName . '%')
+            ->orWhere('date', 'like', '%'. $actorsName . '%')
+            ->orWhere('nationality', 'like', '%'. $id . '%')
+            ->paginate(self::PAGINATE_SIZE);
+        } else {
+            $actors = actor::paginate(self::PAGINATE_SIZE);
+            
+
+        }
+        
+        return view('actors.index', ['actors'=>$actors, 'actorFind'=>$actorsName,'nationalities'=>$nationalities]);
+    }
+
     protected function validateActor($request) {
         return Validator::make($request->all(), [
             'actorName' => ['required', 'string', 'max:255', 'min:1'],

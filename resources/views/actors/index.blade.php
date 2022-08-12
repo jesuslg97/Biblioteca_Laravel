@@ -28,6 +28,17 @@
                 </form>
             </div>
 
+            <div class="col-md-4 form-inline">
+                <h3>Buscador avanzado</h3>
+                <form action="{{route('actors.find')}}" method="post">
+                    @csrf
+                    <input id="actorFind" name="actorFind" class="form-control"
+                           value="@isset($actorFind) {{$actorFind}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
+                        </br>
+                           <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
+                </form>
+            </div>
+
             <div class="col-12">
                 @if(count($actors) > 0)
                     <table class="table table-striped text-center mt-3">

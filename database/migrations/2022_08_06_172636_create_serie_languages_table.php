@@ -18,6 +18,7 @@ class CreateSerieLanguagesTable extends Migration
             $table->integer('serie_id');
             $table->integer('language_id');
             $table->integer('tipo');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

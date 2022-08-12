@@ -22,7 +22,7 @@ class LanguageController extends Controller
             $isoCode = $request->isoCode;
 
             $languages = Language::where('name', 'like', '%'. $languagesName . '%')
-            ->where('ISOcode', 'like', '%'. $isoCode . '%')
+            ->where('ISO_code', 'like', '%'. $isoCode . '%')
             ->paginate(self::PAGINATE_SIZE);
         } else {
             $languages = Language::paginate(self::PAGINATE_SIZE);
@@ -41,7 +41,7 @@ class LanguageController extends Controller
 
         $language = new Language();
         $language->name = $request->languageName;
-        $language->ISOcode = $request->languageISO;
+        $language->ISO_code = $request->languageISO;
         $language->save();
 
         return redirect()->route('languages.index')->with('success', Lang::get('alerts.languages_created_successfully'));
@@ -55,7 +55,7 @@ class LanguageController extends Controller
         $this->validateLanguage($request)->validate();
         Log::info('Fallo',array($language));
         $language->name = $request->languageName;
-        $language->ISOcode = $request->languageISO;
+        $language->ISO_code = $request->languageISO;
         $language->save();
 
         return redirect()->route('languages.index')->with('success', Lang::get('alerts.languages_update_successfully'));
@@ -69,6 +69,25 @@ class LanguageController extends Controller
         return redirect()->route('languages.index')->with('error', Lang::get('alerts.languages_delete_error'));
     }
 
+
+    public function find(Request $request){
+        Log::info('Busqieda avanzada');
+        $languagesName = null;
+
+        if($request->has('languageFind') ) {
+            $languagesName = $request->languageFind;
+         
+            $languages = Language::where('name', 'like', '%'. $languagesName . '%')
+            ->orWhere('ISO_code', 'like', '%'. $languagesName . '%')
+            ->paginate(self::PAGINATE_SIZE);
+        } else {
+            $languages = Language::paginate(self::PAGINATE_SIZE);
+
+        }
+
+        return view('languages.index', ['languages'=>$languages, 'languageFind'=>$languagesName]);
+
+    }
     protected function validateLanguage($request) {
         return Validator::make($request->all(), [
             'languageName' => ['required', 'string', 'max:255', 'min:1'],

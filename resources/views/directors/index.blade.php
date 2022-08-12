@@ -27,6 +27,18 @@
                 </form>
             </div>
 
+            </br>
+            <div class="col-md-4 form-inline">
+                <h3>Buscador avanzado</h3>
+                <form action="{{route('directors.find')}}" method="post">
+                    @csrf
+                    <input id="directorFind" name="directorFind" class="form-control"
+                           value="@isset($directorFind) {{$directorFind}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
+                        </br>
+                           <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
+                </form>
+            </div>
+
             <div class="col-12">
                 @if(count($directors) > 0)
                     <table class="table table-striped text-center mt-3">

@@ -253,7 +253,7 @@ class SerieController extends Controller
         }
         serieLanguage::where('serie_id','=',$serie->id)->delete();
         foreach($request->serieAudios as $audio){
-            
+            Log::info('audio',array($audio));
             $serieLanguage = new serieLanguage();
             $serieLanguage->serie_id = $serie->id;
             $serieLanguage->language_id = $audio;
@@ -282,6 +282,169 @@ class SerieController extends Controller
             return redirect()->route('series.index')->with('success', Lang::get('alerts.series_delete_successfully'));
         }
         return redirect()->route('series.index')->with('error', Lang::get('alerts.series_delete_error'));
+    }
+
+
+    public function find(Request $request){
+        $directors = Director::all();
+        $actors = Actor::all();
+        $platforms = Platform::all();
+        $languages = Language::all();
+
+        $serieFind = null;
+
+
+        if($request->has('serieFind')) {
+
+            $serieFind = $request->serieFind;
+           
+
+            if($request->has('serieFind')  && !empty($serieFind)){
+                $platformId = Platform::where('name','=',$serieFind)->get()->first();
+                if($platformId){
+                    $platId = $platformId->id;
+                }else{
+                    $platId = 0;
+                }
+               
+            }else{
+                $platId = '';
+            }
+
+            if($request->has('serieFind')  && !empty($serieFind)){
+                $directorId = Director::where('name','=',$serieFind)->get()->first();
+                if($directorId){
+                    $dirId = $directorId->id;
+                }else{
+                    $dirId = 0;
+                }
+               
+            }else{
+                $dirId = '';
+            }
+
+            //Actores
+            if($request->has('serieFind')  && !empty($serieFind)){
+                $actorId = Actor::where('name','=',$serieFind)->get()->first();
+                if($actorId){
+                    $actId = $actorId->id;
+                }else{
+                    $actId = 0;
+                }
+               
+            }else{
+                $actId = '';
+            }
+
+            $sActor = [];
+            if( $actId != 0){
+               
+                $seriesActor = serieActor::where('actor_id','=',$actId)->get();
+                foreach($seriesActor as $sa){
+                    array_push($sActor,$sa->serie_id);
+                }
+
+                if($sActor == []){
+                    $s = Serie::all();
+                    foreach($s as $serie){
+                        array_push($sActor,$serie->id);
+                    }
+                }
+            }else{
+                array_push($sActor,0);
+            }
+            //Fin actores
+
+
+        
+            //Audio
+            if($request->has('serieFind')  && !empty($serieFind)){
+                $audioId = Language::where('name','=',$serieFind)->get()->first();
+                if($audioId){
+                    $audId = $audioId->id;
+                }else{
+                    $audId = 0;
+                }
+               
+            }else{
+                $audId = '';
+            }
+
+            $sAudio = [];
+            if($audId != 0){
+                $seriesAudio = serieLanguage::where('language_id','=',$audId)->where('tipo','=',0)->get();
+               
+                foreach($seriesAudio as $sa){
+                    array_push($sAudio,$sa->serie_id);
+                }
+
+                if($sAudio == [] && $audId == 0){
+                    $s = Serie::all();
+                    foreach($s as $serie){
+                        array_push($sAudio,$serie->id);
+                    }
+                }else{
+                    array_push($sAudio,0);
+                }
+            }else{
+                array_push($sAudio,0);
+            }
+           
+            //Fin audio
+
+            //Subtitulos
+
+            if($request->has('serieFind')  && !empty($serieFind)){
+                $subtitleId = Language::where('name','=',$serieFind)->get()->first();
+                if($subtitleId){
+                    $subId = $subtitleId->id;
+                }else{
+                    $subId = 0;
+                }
+               
+            }else{
+                $subId = '';
+            }
+            Log::info('a',array($subId));
+            $sSub = [];
+            if($subId != 0){
+                $seriesSub = serieLanguage::where('language_id','=',$subId)->where('tipo','=',1)->get();
+               
+                foreach($seriesSub as $sa){
+                    array_push($sSub,$sa->serie_id);
+                }
+
+                if($sSub == [] && $subId == 0){
+                    Log::info('b',array($subId));
+                    $s = Serie::all();
+                    foreach($s as $serie){
+                        array_push($sSub,$serie->id);
+                    }
+                }else{
+                    array_push($sSub,0);
+                }
+            }else{
+                array_push($sSub,0);
+            }
+
+            Log::info('',array());
+            Log::info('',array($sAudio));
+            Log::info('',array($sSub));
+            //Fin subtitulos
+
+            $series = Serie::where('title', 'like', '%'. $serieFind . '%')
+            ->orWhere('director','like', '%'. $dirId . '%' )
+            ->orWhere('platform', 'like', '%'. $platId . '%')
+            ->orWhereIn('id', $sActor)
+            ->orWhereIn('id', $sAudio)
+            ->orWhereIn('id', $sSub)
+            ->paginate(self::PAGINATE_SIZE);
+        } else {
+            $series = Serie::paginate(self::PAGINATE_SIZE);
+
+        }
+
+        return view('series.index', ['series'=>$series, 'serieFind'=>$serieFind,'directors'=>$directors,'actors'=>$actors,'platforms'=>$platforms,'languages'=>$languages]);
     }
 
     protected function validateSerie($request) {

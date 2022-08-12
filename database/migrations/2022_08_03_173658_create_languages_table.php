@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSerieActorsTable extends Migration
+class CreateLanguagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateSerieActorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('serie_actors', function (Blueprint $table) {
+        Schema::create('languages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('serie_id');
-            $table->integer('actor_id');
+            $table->string('name')->nullable(false);
+            $table->string('ISO_code', 2)->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
+            //$table->unique(["ISO_code", "delete_at"], 'ISO_code_unique');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateSerieActorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('serie_actors');
+        Schema::dropIfExists('languages');
     }
 }

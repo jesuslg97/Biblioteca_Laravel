@@ -26,6 +26,7 @@ Route::prefix('platforms')->group(function () {
 
 Route::prefix('directors')->middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/', 'DirectorController@index')->name('directors.index');
+    Route::post('/find','DirectorController@find')->name('directors.find');
     Route::get('/create', 'DirectorController@create')->name('directors.create');
     Route::post('/store', 'DirectorController@store')->name('directors.store');
     Route::get('/{director}/edit', 'DirectorController@edit')->name('directors.edit');
@@ -35,6 +36,7 @@ Route::prefix('directors')->middleware('auth')->group(function () {
 
 Route::prefix('actors')->middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/', 'ActorController@index')->name('actors.index');
+    Route::post('/find','ActorController@find')->name('actors.find');
     Route::get('/create', 'ActorController@create')->name('actors.create');
     Route::post('/store', 'ActorController@store')->name('actors.store');
     Route::get('/{actor}/edit', 'ActorController@edit')->name('actors.edit');
@@ -44,6 +46,7 @@ Route::prefix('actors')->middleware('auth')->group(function () {
 
 Route::prefix('languages')->middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/', 'LanguageController@index')->name('languages.index');
+    Route::post('/find','LanguageController@find')->name('languages.find');
     Route::get('/create', 'LanguageController@create')->name('languages.create');
     Route::post('/store', 'LanguageController@store')->name('languages.store');
     Route::get('/{language}/edit', 'LanguageController@edit')->name('languages.edit');
@@ -62,6 +65,7 @@ Route::prefix('nationalities')->middleware('auth')->group(function () {
 
 Route::prefix('series')->middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/', 'SerieController@index')->name('series.index');
+    Route::post('/find','SerieController@find')->name('series.find');
     Route::get('/create', 'SerieController@create')->name('series.create');
     Route::post('/store', 'SerieController@store')->name('series.store');
     Route::get('/{serie}/edit', 'SerieController@edit')->name('series.edit');

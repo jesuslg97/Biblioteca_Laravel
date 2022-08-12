@@ -24,7 +24,7 @@
                     <div class="mb-3">
                         <label for="languageISO" class="form-label">{{__('string.language_ISO')}}</label>
                         <input id="languageISO" name="languageISO" type="text"
-                               placeholder="{{__('string.language_ISO')}}" class="form-control" value="{{$language->ISOcode}}" required>
+                               placeholder="{{__('string.language_ISO')}}" class="form-control" value="{{$language->ISO_code}}" required>
                     </div>
 
                     <div class="col-12 text-center mb-2">

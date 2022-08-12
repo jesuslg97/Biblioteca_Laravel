@@ -35,6 +35,17 @@
                     <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
                 </form>
             </div>
+            </br>
+            <div class="col-md-4 form-inline">
+                <h3>Buscador avanzado</h3>
+                <form action="{{route('series.find')}}" method="post">
+                    @csrf
+                    <input id="serieFind" name="serieFind" class="form-control"
+                           value="@isset($serieFind) {{$serieFind}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
+                        </br>
+                           <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
+                </form>
+            </div>
 
             <div class="col-12">
                 @if(count($series) > 0)

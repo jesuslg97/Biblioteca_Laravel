@@ -71,7 +71,8 @@
                                           method="post" style="display: inline-block">
                                             {{ method_field('delete') }}
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-danger">{{__('string.delete_btn')}}</button>
+                                            <button type="submit" class="btn btn-danger" onclick = "return confirm('¿Realmente desea eliminar? Se borrará la posibilidad de escuchar y ver subtitulada la serie en ese idioma.')">
+                                                {{__('string.delete_btn')}}</button>
                                         </form>
                                     </td>
                                 </tr>

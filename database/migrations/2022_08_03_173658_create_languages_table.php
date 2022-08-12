@@ -19,7 +19,7 @@ class CreateLanguagesTable extends Migration
             $table->string('ISO_code', 2)->nullable(false);
             $table->softDeletes();
             $table->timestamps();
-            //$table->unique(["ISO_code", "delete_at"], 'ISO_code_unique');
+            $table->unique(["ISO_code", "deleted_at"], 'ISO_code_unique');
         });
     }
 

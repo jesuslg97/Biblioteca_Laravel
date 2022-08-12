@@ -147,20 +147,22 @@ class SerieController extends Controller
             }else{
                 $subId = '';
             }
-
+            
             $sSub = [];
             if($subId != 0){
                 $seriesSub = serieLanguage::where('language_id','=',$subId)->where('tipo','=',1)->get();
-               
+                
                 foreach($seriesSub as $sa){
                     array_push($sSub,$sa->serie_id);
                 }
 
-                if($sSub == []){
+                if($sSub == [] && $subId == 0){
                     $s = Serie::all();
                     foreach($s as $serie){
                         array_push($sSub,$serie->id);
                     }
+                }else{
+                    array_push($sSub,0);
                 }
             }else{
                 array_push($sSub,0);

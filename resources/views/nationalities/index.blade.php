@@ -46,7 +46,8 @@
                                           method="post" style="display: inline-block">
                                             {{ method_field('delete') }}
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-danger">{{__('string.delete_btn')}}</button>
+                                            <button type="submit" class="btn btn-danger" onclick = "return confirm('¿Realmente desea eliminar? Se borrará su asociación con del director y el actor.')">
+                                                {{__('string.delete_btn')}}</button>
                                         </form>
                                     </td>
                                 </tr>

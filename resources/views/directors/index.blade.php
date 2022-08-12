@@ -12,29 +12,47 @@
                 <h1>{{__('string.list_title_director')}}</h1>
             </div>
 
-            <div class="col-md-4 form-inline">
-                <form action="{{route('directors.index')}}" method="post">
-                    @csrf
-                    <input id="directorName" name="directorName" class="form-control"
-                           value="@isset($directorName) {{$directorName}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
-                    <input id="directorSurname" name="directorSurname" class="form-control"
-                           value="@isset($directorSurname) {{$directorSurname}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
-                    <input type ="date" id="directorDate" name="directorDate" class="form-control"
-                           value="@isset($directorDate) {{$directorDate}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
-                    <input id="directorNationality" name="directorNationality" class="form-control"
-                           value="@isset($directorNationality) {{$directorNationality}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
-                    <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
-                </form>
+            <div class="col-md-12 mt-2">
+                <h4>Buscador por campo</h4>
             </div>
 
-            </br>
-            <div class="col-md-4 form-inline">
-                <h3>Buscador avanzado</h3>
+            <form action="{{route('directors.index')}}" method="post">
+                <div class="row col-md-12">
+                    @csrf
+                    <div class="col-md-6 mb-2">
+                        <input id="directorName" name="directorName" class="form-control"
+                               value="@isset($directorName) {{$directorName}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <input id="directorSurname" name="directorSurname" class="form-control"
+                               value="@isset($directorSurname) {{$directorSurname}} @endisset" placeholder="{{__('string.search_director_surname_placeholder')}}" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type ="date" id="directorDate" name="directorDate" class="form-control"
+                               value="@isset($directorDate) {{$directorDate}} @endisset" placeholder="{{__('string.search_director_date_placeholder')}}" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <input id="directorNationality" name="directorNationality" class="form-control"
+                               value="@isset($directorNationality) {{$directorNationality}} @endisset" placeholder="{{__('string.search_director_nationality_placeholder')}}" />
+                    </div>
+
+                    <div class="col-12 text-center mt-2">
+                        <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
+                    </div>
+
+                </div>
+            </form>
+
+            <br>
+            <div class="col-md-4 form-inline mb-2">
+                <h4>Buscador avanzado</h4>
                 <form action="{{route('directors.find')}}" method="post">
                     @csrf
                     <input id="directorFind" name="directorFind" class="form-control"
-                           value="@isset($directorFind) {{$directorFind}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
-                        </br>
+                           value="@isset($directorFind) {{$directorFind}} @endisset" placeholder="{{__('string.search_director_placeholder')}}" />
                            <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
                 </form>
             </div>
@@ -57,7 +75,7 @@
                                     <td>{{$director->id}}</td>
                                     <td>{{$director->name}}</td>
                                     <td>{{$director->surname}}</td>
-                                    
+
                                     <td>{{date('d/m/Y', strtotime($director->date))}}</td>
                                     <td>
                                         @foreach($nationalities as $nationality)

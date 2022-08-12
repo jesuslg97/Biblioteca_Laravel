@@ -12,37 +12,57 @@
                 <h1>{{__('string.list_title_serie')}}</h1>
             </div>
 
-            <div class="col-md-4 form-inline">
-                <form action="{{route('series.index')}}" method="post">
-                    @csrf
-                    <input id="serieTitle" name="serieTitle" class="form-control"
-                           value="@isset($serieTitle) {{$serieTitle}} @endisset" placeholder="{{__('string.serie_title')}}" />
-                           
-                           <input id="seriePlatform" name="seriePlatform" class="form-control"
-                           value="@isset($seriePlatform) {{$seriePlatform}} @endisset" placeholder="{{__('string.serie_platform')}}" />
-                           
-                           <input id="serieDirector" name="serieDirector" class="form-control"
-                           value="@isset($serieDirector) {{$serieDirector}} @endisset" placeholder="{{__('string.serie_director')}}" />
-                           
-                           <input id="serieActor" name="serieActor" class="form-control"
-                           value="@isset($serieActor) {{$serieActor}} @endisset" placeholder="{{__('string.serie_actors')}}" />
-                           
-                           <input id="serieAudio" name="serieAudio" class="form-control"
-                           value="@isset($serieAudio) {{$serieAudio}} @endisset" placeholder="{{__('string.serie_audios')}}" />
-                           
-                           <input id="serieSubtitle" name="serieSubtitle" class="form-control"
-                           value="@isset($serieSubtitle) {{$serieSubtitle}} @endisset" placeholder="{{__('string.serie_subtitles')}}" />
-                    <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
-                </form>
+            <div class="col-md-12 mt-2">
+                <h4>Buscador por campo</h4>
             </div>
-            </br>
-            <div class="col-md-4 form-inline">
-                <h3>Buscador avanzado</h3>
+
+            <form action="{{route('series.index')}}" method="post">
+                <div class="row col-md-12">
+                    @csrf
+                    <div class="col-md-4 mb-2">
+                        <input id="serieTitle" name="serieTitle" class="form-control"
+                               value="@isset($serieTitle) {{$serieTitle}} @endisset" placeholder="{{__('string.search_serie_title_placeholder')}}" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <input id="seriePlatform" name="seriePlatform" class="form-control"
+                               value="@isset($seriePlatform) {{$seriePlatform}} @endisset" placeholder="{{__('string.search_serie_platform_placeholder')}}" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <input id="serieDirector" name="serieDirector" class="form-control"
+                               value="@isset($serieDirector) {{$serieDirector}} @endisset" placeholder="{{__('string.search_serie_director_placeholder')}}" />
+                    </div>
+
+                    <div class="col-md-4 mb-2">
+                        <input id="serieActor" name="serieActor" class="form-control"
+                               value="@isset($serieActor) {{$serieActor}} @endisset" placeholder="{{__('string.search_serie_actors_placeholder')}}" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <input id="serieAudio" name="serieAudio" class="form-control"
+                               value="@isset($serieAudio) {{$serieAudio}} @endisset" placeholder="{{__('string.search_serie_audios_placeholder')}}" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <input id="serieSubtitle" name="serieSubtitle" class="form-control"
+                               value="@isset($serieSubtitle) {{$serieSubtitle}} @endisset" placeholder="{{__('string.search_serie_subtitles_placeholder')}}" />
+                    </div>
+
+                    <div class="col-12 text-center mt-2">
+                        <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
+                    </div>
+
+                </div>
+            </form>
+
+            <br>
+            <div class="col-md-4 form-inline mb-2">
+                <h4>Buscador avanzado</h4>
                 <form action="{{route('series.find')}}" method="post">
                     @csrf
                     <input id="serieFind" name="serieFind" class="form-control"
-                           value="@isset($serieFind) {{$serieFind}} @endisset" placeholder="{{__('string.search_director_name_placeholder')}}" />
-                        </br>
+                           value="@isset($serieFind) {{$serieFind}} @endisset" placeholder="{{__('string.search_serie_placeholder')}}" />
                            <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
                 </form>
             </div>
@@ -83,28 +103,28 @@
                                     </td>
 
                                     <td>
-                                        <ul>
+                                        <ul style="list-style: none">
                                             @foreach($serie->serieActors as $serieActor)
-                                                <li> {{$serieActor->actor->name}} {{$serieActor->actor->surname}}</li>
+                                                <li>{{$serieActor->actor->name}} {{$serieActor->actor->surname}}</li>
                                             @endforeach
                                         </ul>
                                     </td>
 
                                     <td>
-                                        <ul>
+                                        <ul style="list-style: none">
                                             @foreach($serie->serieLanguages as $serieLanguage)
                                                 @if($serieLanguage->tipo == 0)
-                                                    <li> {{$serieLanguage->language->name}}</li>
+                                                    <li>{{$serieLanguage->language->name}}</li>
                                                 @endif
                                             @endforeach
                                         </ul>
                                     </td>
 
                                     <td>
-                                        <ul>
+                                        <ul style="list-style: none">
                                             @foreach($serie->serieLanguages as $serieLanguage)
                                                 @if($serieLanguage->tipo == 1)
-                                                    <li> {{$serieLanguage->language->name}}</li>
+                                                    <li>{{$serieLanguage->language->name}}</li>
                                                 @endif
                                             @endforeach
                                         </ul>

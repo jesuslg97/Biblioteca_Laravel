@@ -46,6 +46,10 @@ return [
 
     //DIRECTORS
     'search_director_name_placeholder' => 'Buscar nombre del director',
+    'search_director_surname_placeholder' => 'Buscar apellido del director',
+    'search_director_date_placeholder' => 'Buscar fecha del director',
+    'search_director_nationality_placeholder' => 'Buscar nacionalidad del director',
+    'search_director_placeholder' => 'Buscar director',
     'create_director' => 'Crear director',
     'edit_director' => 'Editar director',
     'director_name' => 'Nombre',
@@ -55,6 +59,10 @@ return [
 
     //ACTORS
     'search_actor_name_placeholder' => 'Buscar nombre del actor',
+    'search_actor_surname_placeholder' => 'Buscar apellido del actor',
+    'search_actor_date_placeholder' => 'Buscar fecha del actor',
+    'search_actor_nationality_placeholder' => 'Buscar nacionalidad del actor',
+    'search_actor_placeholder' => 'Buscar actor',
     'create_actor' => 'Crear actor',
     'edit_actor' => 'Editar actor',
     'actor_name' => 'Nombre',
@@ -64,6 +72,8 @@ return [
 
     //LANGUAGES
     'search_language_name_placeholder' => 'Buscar nombre del idioma',
+    'search_language_iso_placeholder' => 'Buscar ISO del idioma',
+    'search_language_placeholder' => 'Buscar idioma',
     'create_language' => 'Crear idioma',
     'edit_language' => 'Editar idioma',
     'language_name' => 'Nombre',
@@ -77,6 +87,12 @@ return [
 
     //SERIES
     'search_serie_title_placeholder' => 'Buscar título de la serie',
+    'search_serie_platform_placeholder' => 'Buscar plataforma de la serie',
+    'search_serie_director_placeholder' => 'Buscar director de la serie',
+    'search_serie_actors_placeholder' => 'Buscar actores de la serie',
+    'search_serie_audios_placeholder' => 'Buscar audios de la serie',
+    'search_serie_subtitles_placeholder' => 'Buscar subtítulos de la serie',
+    'search_serie_placeholder' => 'Buscar serie',
     'create_serie' => 'Crear serie',
     'edit_serie' => 'Editar serie',
     'serie_title' => 'Título',

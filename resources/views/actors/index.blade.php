@@ -12,29 +12,46 @@
                 <h1>{{__('string.list_title_actor')}}</h1>
             </div>
 
-            <div class="col-md-4 form-inline">
-                <form action="{{route('actors.index')}}" method="post">
-                    @csrf
-                    <input id="actorName" name="actorName" class="form-control"
-                           value="@isset($actorName) {{$actorName}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
-                    
-                           <input id="actorSurname" name="actorSurname" class="form-control"
-                           value="@isset($actorSurname) {{$actorSurname}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
-                    <input type ="date" id="actorDate" name="actorDate" class="form-control"
-                           value="@isset($actorDate) {{$actorDate}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
-                    <input id="actorNationality" name="actorNationality" class="form-control"
-                           value="@isset($actorNationality) {{$actorNationality}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
-                           <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
-                </form>
+            <div class="col-md-12 mt-2">
+                <h4>Buscador por campo</h4>
             </div>
 
-            <div class="col-md-4 form-inline">
-                <h3>Buscador avanzado</h3>
+            <form action="{{route('actors.index')}}" method="post">
+                <div class="row col-md-12">
+                    @csrf
+                    <div class="col-md-6 mb-2">
+                        <input id="actorName" name="actorName" class="form-control"
+                               value="@isset($actorName) {{$actorName}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                        <input id="actorSurname" name="actorSurname" class="form-control"
+                               value="@isset($actorSurname) {{$actorSurname}} @endisset" placeholder="{{__('string.search_actor_surname_placeholder')}}" />
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                        <input type ="date" id="actorDate" name="actorDate" class="form-control"
+                               value="@isset($actorDate) {{$actorDate}} @endisset" placeholder="{{__('string.search_actor_date_placeholder')}}" />
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                        <input id="actorNationality" name="actorNationality" class="form-control"
+                               value="@isset($actorNationality) {{$actorNationality}} @endisset" placeholder="{{__('string.search_actor_nationality_placeholder')}}" />
+                    </div>
+
+                    <div class="col-12 text-center mt-2">
+                        <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
+                    </div>
+
+                </div>
+            </form>
+
+            <div class="col-md-4 form-inline mb-2">
+                <h4>Buscador avanzado</h4>
                 <form action="{{route('actors.find')}}" method="post">
                     @csrf
                     <input id="actorFind" name="actorFind" class="form-control"
-                           value="@isset($actorFind) {{$actorFind}} @endisset" placeholder="{{__('string.search_actor_name_placeholder')}}" />
-                        </br>
+                           value="@isset($actorFind) {{$actorFind}} @endisset" placeholder="{{__('string.search_actor_placeholder')}}" />
                            <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
                 </form>
             </div>

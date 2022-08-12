@@ -12,6 +12,10 @@
                 <h1>{{__('string.list_title_platform')}}</h1>
             </div>
 
+            <div class="col-md-12 mt-2">
+                <h4>Buscador por campo</h4>
+            </div>
+
             <div class="col-md-4 form-inline">
                 <form action="{{route('platforms.index')}}" method="post">
                     @csrf

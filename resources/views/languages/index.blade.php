@@ -12,25 +12,37 @@
                 <h1>{{__('string.list_title_language')}}</h1>
             </div>
 
-            <div class="col-md-4 form-inline">
-                <form action="{{route('languages.index')}}" method="post">
-                    @csrf
-                    <input id="languageName" name="languageName" class="form-control"
-                           value="@isset($languageName) {{$languageName}} @endisset" placeholder="{{__('string.search_language_name_placeholder')}}" />
-                    <input id="isoCode" name="isoCode" class="form-control"
-                           value="@isset($isoCode) {{$isoCode}} @endisset" placeholder="{{__('string.search_language_name_placeholder')}}" />
-                        </br>
-                           <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
-                </form>
+            <div class="col-md-12 mt-2">
+                <h4>Buscador por campo</h4>
             </div>
-            </br>
-            <div class="col-md-4 form-inline">
-                <h3>Buscador avanzado</h3>
+
+            <form action="{{route('languages.index')}}" method="post">
+                <div class="row col-md-12">
+                    @csrf
+                    <div class="col-md-6 mb-2">
+                        <input id="languageName" name="languageName" class="form-control"
+                               value="@isset($languageName) {{$languageName}} @endisset" placeholder="{{__('string.search_language_name_placeholder')}}" />
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                        <input id="isoCode" name="isoCode" class="form-control"
+                               value="@isset($isoCode) {{$isoCode}} @endisset" placeholder="{{__('string.search_language_iso_placeholder')}}" />
+                    </div>
+
+                    <div class="col-12 text-center mt-2">
+                        <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
+                    </div>
+
+                </div>
+            </form>
+
+            <br>
+            <div class="col-md-4 form-inline mb-2">
+                <h4>Buscador avanzado</h4>
                 <form action="{{route('languages.find')}}" method="post">
                     @csrf
                     <input id="languageFind" name="languageFind" class="form-control"
-                           value="@isset($languageFind) {{$languageFind}} @endisset" placeholder="{{__('string.search_language_name_placeholder')}}" />
-                        </br>
+                           value="@isset($languageFind) {{$languageFind}} @endisset" placeholder="{{__('string.search_language_placeholder')}}" />
                            <button type="submit" class="btn btn-dark">{{__('string.search_btn')}}</button>
                 </form>
             </div>

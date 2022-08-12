@@ -115,18 +115,21 @@ class SerieController extends Controller
             }
 
             $sAudio = [];
-            if($audId != 0){
+            if($audId != 0 ){
                 $seriesAudio = serieLanguage::where('language_id','=',$audId)->where('tipo','=',0)->get();
                
                 foreach($seriesAudio as $sa){
                     array_push($sAudio,$sa->serie_id);
                 }
 
-                if($sAudio == []){
+                if($sAudio == [] && ($audId == 0 ||  $audId == '')){
                     $s = Serie::all();
                     foreach($s as $serie){
                         array_push($sAudio,$serie->id);
                     }
+                }else{
+                    Log::info('b');
+                    array_push($sAudio,0);
                 }
             }else{
                 array_push($sAudio,0);
@@ -156,7 +159,7 @@ class SerieController extends Controller
                     array_push($sSub,$sa->serie_id);
                 }
 
-                if($sSub == [] && $subId == 0){
+                if($sSub == []  && ($subId == 0 ||  $subId == '')){
                     $s = Serie::all();
                     foreach($s as $serie){
                         array_push($sSub,$serie->id);

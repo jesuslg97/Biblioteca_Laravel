@@ -1,0 +1,13 @@
+PASO 1:
+Realizar el comando "php artisan migrate" para que generan todas la tablas con sus respectivos campos.
+
+PASO 2:
+Realizar el comando "php artisan db:seed" para insertas datos reales en cada una de las tablas de la base de datos.
+
+PASO 3:
+Realizar el comando "php artisan serve" para arrancar el servicio y poder ver la aplicación en funcionamiento.
+
+PASO 4:
+Como usuario prueba hemos creado el siguiente:
+	EMAIL: test@test.com
+	PASSWORD: 123456789
